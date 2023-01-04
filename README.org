@@ -1,3 +1,17 @@
 #+title: p-snow's guix channel
 
-* Packages
+This is my collection of GNU Guix package definitions which focus mainly on software developped for and by Japanese community.
+
+To use this channel, add the following code snippet to your configuration file(~/.config/guix/channels.scm).
+
+#+begin_src scheme
+  (cons* (channel
+          (name 'p-snow)
+          (url "https://github.com/p-snow/guix-channel")
+          (introduction
+           (make-channel-introduction
+            "3a10227fbc2d5e9744aced43f820a0d3bf64add5"
+            (openpgp-fingerprint
+             "CF56 FC53 3AD6 6A67 6FDC  1D73 0D2B AF0E 8AEF 0306"))))
+         %default-channels)
+#+end_src
