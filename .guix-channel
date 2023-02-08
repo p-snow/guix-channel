@@ -3,5 +3,8 @@
  (url "https://github.com/p-snow/guix-channel")
  (dependencies
   (channel
+   (name guix)
+   (url "https://git.savannah.gnu.org/git/guix.git"))
+  (channel
    (name guix-jp)
    (url "https://gitlab.com/guix-jp/channel.git"))))
