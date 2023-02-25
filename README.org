@@ -15,3 +15,12 @@ To use this channel, add the following code snippet to your configuration file(~
              "CF56 FC53 3AD6 6A67 6FDC  1D73 0D2B AF0E 8AEF 0306"))))
          %default-channels)
 #+end_src
+
+* Packages
+- xremap :: Key remapper for X11 and Wayland.
+  - xremap-x11 :: for X11
+  - xremap-gnome :: for GNOME
+  - xremap-sway :: for Sway
+- font-ipa :: Japanese font from the Information-technology Promotion Agency
+- migemo-dict-azik :: AZIK-compliant dictionary for Migemo
+- mpv-libarchive :: MPV media player capable of playing archive file
