@@ -23,5 +23,5 @@ To use this channel, add the following code snippet to your configuration file(~
   - xremap-sway :: for Sway
 - font-ipa :: Japanese font from the Information-technology Promotion Agency
 - migemo-dict-azik :: AZIK-compliant dictionary for Migemo
-- mpv-libarchive :: MPV media player capable of playing archive file
+- mpv-libarchive (unavailable) :: MPV media player capable of playing archive file
 - rtorrent-xmlrpc :: rTorrent bittorrent client with XMLRPC support
