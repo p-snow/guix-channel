@@ -10,7 +10,7 @@
   ;; Return a xremap package built for DISPLAY-SERVER.
   (package
     (name (string-append "xremap-" display-server))
-    (version "0.8.2")
+    (version "0.8.7")
     (source
      (origin
        (method url-fetch)
@@ -26,19 +26,23 @@
            ("x86_64-linux"
             (cond
              ((string= display-server "x11")
-              "065xlicmyzw5d3r1si2kh608fqxyxpi127zvl19f0cqhl28xx72j")
+              "1dr5bbhq32hq0x8qszs34gw32innkv5ng65zc2ymm3cakb1p86vh")
              ((string= display-server "gnome")
-              "0wgc4bqnh7qddxvpwwy2g28wqhmx6lzf3yps0za73xk33cc5m0ak")
+              "0sgvc23pj1dng0clhid4lhm9xsjkicwvzn6dplfgmqgjsldnm3g5")
+             ((string= display-server "kde")
+              "00vb3bq8g8prg8gbk92csvp8lbv6dk4jyx2l1762jzpgmqgkbkq0")
              ((string= display-server "sway")
-              "141n38ibnf3g49n4vhsgs9rrgkg0cr7a2j8q42wikfnmiy5bbbnp")))
+              "1n3d63s113dgh4wa0phfbgxswpwjwx3ypdwkxv4m67r6ac3xkkxb")))
            ("aarch64-linux"
             (cond
              ((string= display-server "x11")
-              "0kmcpvi3c9cfp33wmw43nj6njzpmn3mbb2x82xasibc6jb6s45wn")
+              "0hndiczjw4hf9wsp9s3njqc5z7n6as6x2rlbl1hi83j6cvi9lw8r")
              ((string= display-server "gnome")
-              "0j7v8mbr3yhylgkjs38937fx5j0j524h9qqsx4ziaz7la76nlgxj")
+              "1imwhq82jkf79vz3qgx563h856j9j875sj151bzcln603130h63b")
+             ((string= display-server "kde")
+              "1kdh3yyzffpi8kpbw4haw8dl1n5fmav00xixbdsczm4bdyfbk044")
              ((string= display-server "sway")
-              "0drkqsk8m0vldg5r99gs4mlhxfigb5yanwnnsz2zhpslidqg9m3a"))))))))
+              "1zmhynkfi18cis31gjrxz4alfcfajkf6cwk7zr9zy060win2xlkk"))))))))
     (build-system copy-build-system)
     (arguments
      (list #:install-plan ''(("xremap" "bin/"))))
@@ -55,6 +59,9 @@ it supports app-specific remapping and Wayland.")
 
 (define-public xremap-gnome
   (make-xremap "gnome"))
+
+(define-public xremap-kde
+  (make-xremap "kde"))
 
 (define-public xremap-sway
   (make-xremap "sway"))
