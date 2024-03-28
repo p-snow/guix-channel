@@ -10,7 +10,7 @@
   ;; Return a xremap package built for DISPLAY-SERVER.
   (package
    (name (string-append "xremap-" display-server))
-   (version "0.8.14")
+   (version "0.8.18")
    (source
     (origin
      (method url-fetch)
@@ -26,23 +26,23 @@
          ("x86_64-linux"
           (cond
            ((string= display-server "x11")
-            "14bldm35rvcbvxyciw550fdbv24kn44qdabzw795kp7xsgaha7x7")
+            "1v3n146nr72ppdk4jdb3j0s428mfhmn6ij615cb09zi8y723m632")
            ((string= display-server "gnome")
-            "0b69nbfn0vx45k9xqbw06msgbj343bmxk4vkr1ps8v1f6lrv9fqw")
+            "13jjd7xw2ng1w9w7rywdxi66q56gmrd28c23ix764pd53vw47dyg")
            ((string= display-server "kde")
-            "18g1fvklfczg027mxy60j83pkln38sf4dmx34w07j9jxc257ksvv")
+            "13hyshaxy4qjck2z76hmxvm8m3p73k7hbsxfgs15c3asxdh63b8m")
            ((string= display-server "sway")
-            "1j1rza8nws0gqbp15ldxc9d4111iiwpjp678ifshz1wnnjqbyykm")))
+            "03ylnxlrnx9n07g85w22qn9b71xjnwiy2rxcnlyinx734qx8kbf7")))
          ("aarch64-linux"
           (cond
            ((string= display-server "x11")
-            "03kpwl5632qkhsqgvyc7crias7jaz994r3dslpfq7vps2bmzzkig")
+            "0l4sxvp1m60y1y382dmafsnswrrjq7irknqj6clasd9rzinfakpa")
            ((string= display-server "gnome")
-            "1bsw75q8zw7zkvq5bcf6g9zcar9c104pcd9zprzm6sl6vxckn6q1")
+            "15czk35k2c4f116w8vz3d67c86882hbq8jddg6vdwnvz9cfbmg5q")
            ((string= display-server "kde")
-            "17pjrggg5g7837cxfmxarmrj415k012hm7gi76rgiiirr1sgb851")
+            "1c662dk2lgqglalnz4vl37xdmk96h7y8sc7nbhqd8vw7g2azpkrx")
            ((string= display-server "sway")
-            "120yrbnln3yjr2gvrjh8la24x9bgjjm2jd4xqx4l0lkzp2glvflm"))))))))
+            "1wlpmyialpc5zf74df0yigsqv10yclhj610q3sb75rqqfqkcplnp"))))))))
    (build-system copy-build-system)
    (arguments
     (list #:install-plan ''(("xremap" "bin/"))))
