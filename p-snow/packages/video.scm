@@ -7,6 +7,5 @@
   (package
    (inherit mpv)
    (name "mpv-libarchive")
-   (version "0.35.1")
    (inputs (modify-inputs (package-inputs mpv)
                           (prepend libarchive)))))
