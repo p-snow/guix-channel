@@ -18,6 +18,7 @@ To use this channel, add the following code snippet to your configuration file(~
 
 * Packages
 - emacs-org-web-track :: Web data tracking framework in Org Mode
+- emacs-japanese-holidays :: Calendar functions for the Japanese calendar
 - font-ipa :: Japanese font from the Information-technology Promotion Agency
 - migemo-dict-azik :: AZIK-compliant dictionary for Migemo
 - mpv-libarchive (unavailable) :: MPV media player capable of playing archive file
