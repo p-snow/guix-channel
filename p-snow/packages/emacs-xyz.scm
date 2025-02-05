@@ -59,17 +59,20 @@ from web pages and web APIs.")
       (source
        (origin
          (method git-fetch)
-         (uri
-          (git-reference
-           (url "https://github.com/emacs-jp/japanese-holidays.git")
-           (commit commit)))
+         (uri (git-reference
+               (url "https://github.com/emacs-jp/japanese-holidays")
+               (commit commit)))
          (file-name (git-file-name name version))
          (sha256
           (base32 "1bxbxczsf0b7jiim2anjh16h243khyrcv4k07qg0yy8c9zrl18aq"))))
       (build-system emacs-build-system)
+      (arguments
+       (list
+        #:tests? #t
+        #:test-command #~(list "make" "test")))
       (home-page "https://github.com/emacs-jp/japanese-holidays")
-      (synopsis "Calendar functions for the Japanese calendar")
+      (synopsis "Japanese holidays for Emacs calendar")
       (description
-       "This utility defines Japanese holiday for calendar function. This also
-enables to display weekends or any weekday with preferred face.")
+       "This package defines Japanese holidays for Emacs calendar and provides
+highlighting capabilities for holidays and weekends.")
       (license license:gpl2+))))
