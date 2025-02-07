@@ -49,30 +49,3 @@
      "A framework in Org Mode to assist users in managing data that changes over time
 from web pages and web APIs.")
     (license license:gpl3+)))
-
-(define-public emacs-japanese-holidays
-  (let ((revision "0")
-        (commit "324b6bf2f55ec050bef49e001caedaabaf4fa35d"))
-    (package
-      (name "emacs-japanese-holidays")
-      (version (git-version "1.190317" revision commit))
-      (source
-       (origin
-         (method git-fetch)
-         (uri (git-reference
-               (url "https://github.com/emacs-jp/japanese-holidays")
-               (commit commit)))
-         (file-name (git-file-name name version))
-         (sha256
-          (base32 "1bxbxczsf0b7jiim2anjh16h243khyrcv4k07qg0yy8c9zrl18aq"))))
-      (build-system emacs-build-system)
-      (arguments
-       (list
-        #:tests? #t
-        #:test-command #~(list "make" "test")))
-      (home-page "https://github.com/emacs-jp/japanese-holidays")
-      (synopsis "Japanese holidays for Emacs calendar")
-      (description
-       "This package defines Japanese holidays for Emacs calendar and provides
-highlighting capabilities for holidays and weekends.")
-      (license license:gpl2+))))
