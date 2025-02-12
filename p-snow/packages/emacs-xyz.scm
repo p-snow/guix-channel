@@ -49,3 +49,18 @@
      "A framework in Org Mode to assist users in managing data that changes over time
 from web pages and web APIs.")
     (license license:gpl3+)))
+
+(define-public emacs-org-drill-head
+  (package
+    (inherit emacs-org-drill)
+    (name "emacs-org-drill-head")
+    (version "2.7.0")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+             (url "https://gitlab.com/phillord/org-drill")
+             (commit "bf8fe812d44a3ce3e84361fb39b8ef28ca10fd0c")))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "079x6rcz50rpw0vdq5q2kjpixz95k9f3j9dwk91r5111vvr428w3"))))))
