@@ -92,7 +92,9 @@ from web pages and web APIs.")
               (lambda* (#:key inputs #:allow-other-keys)
                 (emacs-substitute-variables "migemo.el"
                   ("migemo-directory"
-                   (search-input-directory inputs "share/migemo/utf-8"))))))))
+                   (search-input-directory inputs "share/migemo/utf-8"))
+                  ("migemo-command"
+                   (search-input-file inputs "bin/cmigemo"))))))))
       (inputs (list cmigemo migemo-dict))
       (home-page "http://0xcc.net/migemo/")
       (synopsis "Japanese incremental search in Emacs")
