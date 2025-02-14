@@ -92,13 +92,12 @@ from web pages and web APIs.")
               (lambda* (#:key inputs #:allow-other-keys)
                 (emacs-substitute-variables "migemo.el"
                   ("migemo-directory"
-                   (search-input-directory inputs "/share/migemo/utf-8"))))))))
-      (inputs
-       (list cmigemo migemo-dict))
+                   (search-input-directory inputs "share/migemo/utf-8"))))))))
+      (inputs (list cmigemo migemo-dict))
       (home-page "http://0xcc.net/migemo/")
       (synopsis "Japanese incremental search in Emacs")
       (description
-       "This package enables incremental search of Japanese text using the Roman
-alphabet (romaji) in Emacs. It is an Emacs plugin for Migemo, a backend program
-that allows various editors to offer this functionality.")
+       "@code{emacs-migemo} enables incremental search of Japanese text using Romaji in
+Emacs.  It serves as an Emacs plugin for @code{migemo}, which is a backend
+program that allows various editors to offer this functionality.")
       (license license:gpl2+))))
