@@ -103,3 +103,29 @@ from web pages and web APIs.")
 Emacs.  It serves as an Emacs plugin for @code{migemo}, which is a backend
 program that allows various editors to offer this functionality.")
       (license license:gpl2+))))
+
+(define-public emacs-avy-migemo-draft
+  (let ((revision "0")
+        (commit "922a6dd82c0bfa316b0fbb56a9d4dd4ffa5707e7"))
+    (package
+      (name "emacs-avy-migemo-draft")
+      (version (git-version "0.3.2" revision commit))
+      (source
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+               (url "https://github.com/momomo5717/avy-migemo")
+               (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32 "1a4421h15ba7lsnbh8kqm3hvs06fp830wb1nvwgpsk7vmqqi2qgl"))))
+      (build-system emacs-build-system)
+      (propagated-inputs (list emacs-avy emacs-migemo))
+      (home-page "https://github.com/momomo5717/avy-migemo")
+      (synopsis "Emacs avy for Japanese")
+      (description
+       "This package enables support for Japanese when using avy in Emacs.  Avy is a
+completion method for characters, words, and the like based on a balanced
+decision tree.  With this package, Japanese characters are added to avy's
+targets.  Users can narrow down the decision tree using kana input.")
+      (license license:gpl3+))))
