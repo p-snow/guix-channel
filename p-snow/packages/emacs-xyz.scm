@@ -67,11 +67,11 @@ from web pages and web APIs.")
        (sha256
         (base32 "079x6rcz50rpw0vdq5q2kjpixz95k9f3j9dwk91r5111vvr428w3"))))))
 
-(define-public emacs-migemo
+(define-public emacs-migemo-draft
   (let ((revision "0")
         (commit "7d78901773da3b503e5c0d5fa14a53ad6060c97f"))
     (package
-      (name "emacs-migemo")
+      (name "emacs-migemo-draft")
       (version (git-version "1.9.2" revision commit))
       (source
        (origin
