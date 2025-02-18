@@ -19,7 +19,6 @@ To use this channel, add the following code snippet to your configuration file(~
 * Packages
 - emacs-org-web-track :: Web data tracking framework in Org Mode
 - emacs-org-drill-head :: Org Drill packaged from HEAD in master branch
-- emacs-migemo :: Japanese incremental search in Emacs
 - emacs-avy-migemo :: Emacs avy for Japanese
 - font-ipa :: Japanese font from the Information-technology Promotion Agency
 - migemo-dict-azik :: AZIK-compliant dictionary for Migemo

@@ -67,43 +67,6 @@ from web pages and web APIs.")
        (sha256
         (base32 "079x6rcz50rpw0vdq5q2kjpixz95k9f3j9dwk91r5111vvr428w3"))))))
 
-(define-public emacs-migemo-draft
-  (let ((revision "0")
-        (commit "7d78901773da3b503e5c0d5fa14a53ad6060c97f"))
-    (package
-      (name "emacs-migemo-draft")
-      (version (git-version "1.9.2" revision commit))
-      (source
-       (origin
-         (method git-fetch)
-         (uri (git-reference
-               (url "https://github.com/emacs-jp/migemo")
-               (commit commit)))
-         (file-name (git-file-name name version))
-         (sha256
-          (base32 "1098lf50fcm25wb41g1b27wg8hc3g2w6cgjq02sc8pq6qnrr0ql2"))))
-      (build-system emacs-build-system)
-      (arguments
-       (list
-        #:tests? #f
-        #:phases
-        #~(modify-phases %standard-phases
-            (add-after 'unpack 'patch-migemo-directory
-              (lambda* (#:key inputs #:allow-other-keys)
-                (emacs-substitute-variables "migemo.el"
-                  ("migemo-directory"
-                   (search-input-directory inputs "share/migemo/utf-8"))
-                  ("migemo-command"
-                   (search-input-file inputs "bin/cmigemo"))))))))
-      (inputs (list cmigemo migemo-dict))
-      (home-page "http://0xcc.net/migemo/")
-      (synopsis "Japanese incremental search in Emacs")
-      (description
-       "@code{emacs-migemo} enables incremental search of Japanese text using Romaji in
-Emacs.  It serves as an Emacs plugin for @code{migemo}, which is a backend
-program that allows various editors to offer this functionality.")
-      (license license:gpl2+))))
-
 (define-public emacs-avy-migemo-draft
   (let ((revision "0")
         (commit "922a6dd82c0bfa316b0fbb56a9d4dd4ffa5707e7"))
