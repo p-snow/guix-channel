@@ -83,7 +83,7 @@ from web pages and web APIs.")
          (sha256
           (base32 "1a4421h15ba7lsnbh8kqm3hvs06fp830wb1nvwgpsk7vmqqi2qgl"))))
       (build-system emacs-build-system)
-      (propagated-inputs (list emacs-avy emacs-migemo-draft))
+      (propagated-inputs (list emacs-avy emacs-migemo))
       (home-page "https://github.com/momomo5717/avy-migemo")
       (synopsis "Emacs avy for Japanese")
       (description
