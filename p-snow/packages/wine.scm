@@ -50,19 +50,6 @@
   #:use-module (ice-9 match)
   #:use-module (srfi srfi-1))
 
-;; (define-module (p-snow packages wine)
-;;   #:use-module (gnu packages wine)
-;;   #:use-module (guix packages)
-;;   #:use-module (guix build-system copy)
-;;   #:use-module (guix git-download)
-;;   #:use-module (guix gexp)
-;;   #:use-module (guix utils)
-;;   #:use-module ((guix licenses) #:prefix license:)
-;;   #:use-module ((ice-9 ftw) #:select (scandir))
-;;   #:use-module (gnu packages video)
-;;   #:use-module (gnu packages backup)
-;;   )
-
 (define-public wine-minimal-legacy
   (package
     (name "wine-minimal-legacy")
