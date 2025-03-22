@@ -52,30 +52,40 @@
 from web pages and web APIs.")
    (license license:gpl3+)))
 
-(define-public emacs-avy-migemo-draft
+(define-public emacs-avy-migemo
   (let ((revision "0")
         (commit "922a6dd82c0bfa316b0fbb56a9d4dd4ffa5707e7"))
     (package
-     (name "emacs-avy-migemo-draft")
+     (name "emacs-avy-migemo")
      (version (git-version "0.3.2" revision commit))
      (source
       (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://github.com/momomo5717/avy-migemo.git")
+             (url "https://github.com/momomo5717/avy-migemo")
              (commit commit)))
        (file-name (git-file-name name version))
        (sha256
         (base32 "1a4421h15ba7lsnbh8kqm3hvs06fp830wb1nvwgpsk7vmqqi2qgl"))))
      (build-system emacs-build-system)
+     (arguments
+      (list
+       #:phases
+       #~(modify-phases %standard-phases
+                        (add-after 'unpack 'remove-examples
+                                   (lambda _
+                                     (for-each delete-file
+                                               '("avy-migemo-e.g.counsel.el"
+                                                 "avy-migemo-e.g.ivy.el" "avy-migemo-e.g.swiper.el"
+                                                 "avy-migemo-e.g.zzz-to-char.el")))))))
      (propagated-inputs (list emacs-avy emacs-migemo))
      (home-page "https://github.com/momomo5717/avy-migemo")
-     (synopsis "Emacs avy for Japanese")
+     (synopsis "Emacs Avy for Japanese")
      (description
-      "This package enables support for Japanese when using avy in Emacs.  Avy is a
-completion method for characters, words, and the like based on a balanced
-decision tree.  With this package, Japanese characters are added to avy's
-targets.  Users can narrow down the decision tree using kana input.")
+      "This package enables support for Japanese when using Avy in Emacs.  Avy is a
+completion method for characters, words, and similar elements based on a
+balanced decision tree.  With this package, Japanese characters are added to
+Avy's targets, allowing users to narrow down the decision tree using kana input.")
      (license license:gpl3+))))
 
 (define-public emacs-org-clock-convenience
