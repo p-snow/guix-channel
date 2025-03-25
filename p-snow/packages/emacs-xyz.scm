@@ -14,181 +14,168 @@
 
 (define-public emacs-org-web-track
   (package
-   (name "emacs-org-web-track")
-   (version "0.1.1")
-   (source
-    (origin
-     (method git-fetch)
-     (uri (git-reference
-           (url "https://github.com/p-snow/org-web-track.git")
-           (commit (string-append "v" version))))
-     (file-name (git-file-name name version))
-     (sha256
-      (base32
-       "0ski1bvmxvjr2kf819hjr0lgx1q5y48g4g21mm0wmjcqjngfsh1r"))))
-   (build-system emacs-build-system)
-   (propagated-inputs
-    (list emacs-request
-          emacs-enlive
-          emacs-gnuplot))
-   (native-inputs (list texinfo))
-   (inputs (list gnuplot))
-   (arguments
-    (list
-     #:phases #~(modify-phases %standard-phases
-                               (add-after 'unpack 'build-info-manual
-                                          (lambda _
-                                            (import (guix build utils))
-                                            (invoke (string-append #$emacs "/bin/emacs")
-                                                    "README.org"
-                                                    "--batch"
-                                                    "-f"
-                                                    "org-texinfo-export-to-info"
-                                                    "--kill") #t)))))
-   (home-page "https://github.com/p-snow/org-web-track")
-   (synopsis "Web data tracking framework in Org Mode")
-   (description
-    "A framework in Org Mode to assist users in managing data that changes over time
+    (name "emacs-org-web-track")
+    (version "0.1.1")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+             (url "https://github.com/p-snow/org-web-track.git")
+             (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32
+         "0ski1bvmxvjr2kf819hjr0lgx1q5y48g4g21mm0wmjcqjngfsh1r"))))
+    (build-system emacs-build-system)
+    (propagated-inputs
+     (list emacs-request
+           emacs-enlive
+           emacs-gnuplot))
+    (native-inputs (list texinfo))
+    (inputs (list gnuplot))
+    (arguments
+     (list
+      #:phases #~(modify-phases %standard-phases
+                   (add-after 'unpack 'build-info-manual
+                     (lambda _
+                       (import (guix build utils))
+                       (invoke (string-append #$emacs "/bin/emacs")
+                               "README.org"
+                               "--batch"
+                               "-f"
+                               "org-texinfo-export-to-info"
+                               "--kill") #t)))))
+    (home-page "https://github.com/p-snow/org-web-track")
+    (synopsis "Web data tracking framework in Org Mode")
+    (description
+     "A framework in Org Mode to assist users in managing data that changes over time
 from web pages and web APIs.")
-   (license license:gpl3+)))
+    (license license:gpl3+)))
 
 (define-public emacs-avy-migemo
   (let ((revision "0")
         (commit "922a6dd82c0bfa316b0fbb56a9d4dd4ffa5707e7"))
     (package
-     (name "emacs-avy-migemo")
-     (version (git-version "0.3.2" revision commit))
-     (source
-      (origin
-       (method git-fetch)
-       (uri (git-reference
-             (url "https://github.com/momomo5717/avy-migemo")
-             (commit commit)))
-       (file-name (git-file-name name version))
-       (sha256
-        (base32 "1a4421h15ba7lsnbh8kqm3hvs06fp830wb1nvwgpsk7vmqqi2qgl"))))
-     (build-system emacs-build-system)
-     (arguments
-      (list
-       #:phases
-       #~(modify-phases %standard-phases
-                        (add-after 'unpack 'remove-examples
-                                   (lambda _
-                                     (for-each delete-file
-                                               '("avy-migemo-e.g.counsel.el"
-                                                 "avy-migemo-e.g.ivy.el" "avy-migemo-e.g.swiper.el"
-                                                 "avy-migemo-e.g.zzz-to-char.el")))))))
-     (propagated-inputs (list emacs-avy emacs-migemo))
-     (home-page "https://github.com/momomo5717/avy-migemo")
-     (synopsis "Emacs Avy for Japanese")
-     (description
-      "This package enables support for Japanese when using Avy in Emacs.  Avy is a
+      (name "emacs-avy-migemo")
+      (version (git-version "0.3.2" revision commit))
+      (source
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+               (url "https://github.com/momomo5717/avy-migemo")
+               (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32 "1a4421h15ba7lsnbh8kqm3hvs06fp830wb1nvwgpsk7vmqqi2qgl"))))
+      (build-system emacs-build-system)
+      (arguments
+       '(#:exclude (cons* "^avy-migemo-e\\.g\\.[^/]*\\.el$" %default-exclude)))
+      (propagated-inputs (list emacs-avy emacs-migemo))
+      (home-page "https://github.com/momomo5717/avy-migemo")
+      (synopsis "Emacs Avy for Japanese")
+      (description
+       "This package enables support for Japanese when using Avy in Emacs.  Avy is a
 completion method for characters, words, and similar elements based on a
 balanced decision tree.  With this package, Japanese characters are added to
 Avy's targets, allowing users to narrow down the decision tree using kana input.")
-     (license license:gpl3+))))
+      (license license:gpl3+))))
 
 (define-public emacs-org-clock-convenience
   (let ((revision "0")
         (commit "5a9e32af581ecca0359de1815e3d37b563f9f8b2"))
     (package
-     (name "emacs-org-clock-convenience")
-     (version (git-version "1.3" revision commit))
-     (source
-      (origin
-       (method git-fetch)
-       (uri (git-reference
-             (url "https://github.com/dfeich/org-clock-convenience.git")
-             (commit commit)))
-       (file-name (git-file-name name version))
-       (sha256
-        (base32 "1yhzmbflaw1gkg37i0ri6fxidqrkggfkl8mk5bq1s5xfd1jpp971"))))
-     (build-system emacs-build-system)
-     (arguments
-      (list
-       #:tests? #t
-       #:test-command #~(list "make" "test")))
-     (home-page "https://github.com/dfeich/org-clock-convenience")
-     (synopsis "Convenience functions for org time")
-     (description
-      "Convenience functions for easier time tracking. Provides commands for changing
+      (name "emacs-org-clock-convenience")
+      (version (git-version "1.3" revision commit))
+      (source
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+               (url "https://github.com/dfeich/org-clock-convenience.git")
+               (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32 "1yhzmbflaw1gkg37i0ri6fxidqrkggfkl8mk5bq1s5xfd1jpp971"))))
+      (build-system emacs-build-system)
+      (arguments
+       (list
+        #:tests? #t
+        #:test-command #~(list "make" "test")))
+      (home-page "https://github.com/dfeich/org-clock-convenience")
+      (synopsis "Convenience functions for org time")
+      (description
+       "Convenience functions for easier time tracking. Provides commands for changing
 timestamps directly from the agenda view.")
-     (license license:gpl3+))))
+      (license license:gpl3+))))
 
 (define-public emacs-org-tidy
   (let ((revision "0")
         (commit "0bea3a2ceaa999e0ad195ba525c5c1dcf5fba43b"))
     (package
-     (name "emacs-org-tidy")
-     (version (git-version "0.1" revision commit))
-     (source
-      (origin
-       (method git-fetch)
-       (uri (git-reference
-             (url "https://github.com/jxq0/org-tidy.git")
-             (commit commit)))
-       (file-name (git-file-name name version))
-       (sha256
-        (base32 "1rwq53j31vixyhsi7khb1xc0fcqdmqyp7ycq5hinligfxk87sr4s"))))
-     (propagated-inputs (list emacs-dash))
-     (build-system emacs-build-system)
-     (home-page "https://github.com/jxq0/org-tidy")
-     (synopsis "A minor mode to tidy org-mode buffers.")
-     (description
-      "A minor mode to tidy org-mode buffers.")
-     (license license:gpl3+))))
+      (name "emacs-org-tidy")
+      (version (git-version "0.1" revision commit))
+      (source
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+               (url "https://github.com/jxq0/org-tidy.git")
+               (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32 "1rwq53j31vixyhsi7khb1xc0fcqdmqyp7ycq5hinligfxk87sr4s"))))
+      (propagated-inputs (list emacs-dash))
+      (build-system emacs-build-system)
+      (home-page "https://github.com/jxq0/org-tidy")
+      (synopsis "A minor mode to tidy org-mode buffers.")
+      (description
+       "A minor mode to tidy org-mode buffers.")
+      (license license:gpl3+))))
 
 (define-public emacs-whole-line-or-region
   (let ((revision "0")
         (commit "052676394c675303d6b953209e5d2ef090fbc45d"))
     (package
-     (name "emacs-whole-line-or-region")
-     (version (git-version "2.0" revision commit))
-     (source
-      (origin
-       (method git-fetch)
-       (uri (git-reference
-             (url "https://github.com/purcell/whole-line-or-region.git")
-             (commit commit)))
-       (file-name (git-file-name name version))
-       (sha256
-        (base32 "036x6nzij6h7s8ad89clx58hdkcw6kh31blhksdarwl7ssmi2ajg"))))
-     (build-system emacs-build-system)
-     ;; FIXME: Permission denied, /homeless-shelter
-     ;; (arguments
-     ;;  (list
-     ;;   #:tests? #t
-     ;;   #:test-command #~(list "make" "all")))
-     (home-page "https://github.com/purcell/whole-line-or-region")
-     (synopsis "Operate on current line if region undefined.")
-     (description
-      "This minor mode allows functions to operate on the current line if they would
+      (name "emacs-whole-line-or-region")
+      (version (git-version "2.0" revision commit))
+      (source
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+               (url "https://github.com/purcell/whole-line-or-region.git")
+               (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32 "036x6nzij6h7s8ad89clx58hdkcw6kh31blhksdarwl7ssmi2ajg"))))
+      (build-system emacs-build-system)
+      (home-page "https://github.com/purcell/whole-line-or-region")
+      (synopsis "Operate on current line if region undefined.")
+      (description
+       "This minor mode allows functions to operate on the current line if they would
 normally operate on a region and region is currently undefined.")
-     (license license:gpl3+))))
+      (license license:gpl3+))))
 
 (define-public emacs-define-word
   (let ((revision "0")
         (commit "31a8c67405afa99d0e25e7c86a4ee7ef84a808fe"))
     (package
-     (name "emacs-define-word")
-     (version (git-version "0.1.0" revision commit))
-     (source
-      (origin
-       (method git-fetch)
-       (uri (git-reference
-             (url "https://github.com/abo-abo/define-word.git")
-             (commit commit)))
-       (file-name (git-file-name name version))
-       (sha256
-        (base32 "0h3dasg81f1b08xvz38nyd887pdlv60kj8q50kk2aqlpkr8j0y18"))))
-     (build-system emacs-build-system)
-     (home-page "https://github.com/abo-abo/define-word")
-     (synopsis "Display the definition of word at point.")
-     (description
-      "This package will send an anonymous request to https://wordnik.com/ to get the
+      (name "emacs-define-word")
+      (version (git-version "0.1.0" revision commit))
+      (source
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+               (url "https://github.com/abo-abo/define-word.git")
+               (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32 "0h3dasg81f1b08xvz38nyd887pdlv60kj8q50kk2aqlpkr8j0y18"))))
+      (build-system emacs-build-system)
+      (home-page "https://github.com/abo-abo/define-word")
+      (synopsis "Display the definition of word at point.")
+      (description
+       "This package will send an anonymous request to https://wordnik.com/ to get the
 definition of word or phrase at point, parse the resulting HTML page, and
 display it with `message'.")
-     (license license:gpl3+))))
+      (license license:gpl3+))))
 
 (define-public emacs-jaword
   (let ((revision "0")
