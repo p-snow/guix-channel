@@ -99,7 +99,7 @@ timestamps directly from the agenda view.")
       (propagated-inputs (list emacs-dash))
       (build-system emacs-build-system)
       (home-page "https://github.com/jxq0/org-tidy")
-      (synopsis "A minor mode to tidy org-mode buffers.")
+      (synopsis "A minor mode to tidy org-mode buffers")
       (description
        "A minor mode to tidy org-mode buffers.")
       (license license:gpl3+))))
@@ -121,7 +121,7 @@ timestamps directly from the agenda view.")
           (base32 "036x6nzij6h7s8ad89clx58hdkcw6kh31blhksdarwl7ssmi2ajg"))))
       (build-system emacs-build-system)
       (home-page "https://github.com/purcell/whole-line-or-region")
-      (synopsis "Operate on current line if region undefined.")
+      (synopsis "Operate on current line if region undefined")
       (description
        "This minor mode allows functions to operate on the current line if they would
 normally operate on a region and region is currently undefined.")
@@ -144,7 +144,7 @@ normally operate on a region and region is currently undefined.")
           (base32 "0h3dasg81f1b08xvz38nyd887pdlv60kj8q50kk2aqlpkr8j0y18"))))
       (build-system emacs-build-system)
       (home-page "https://github.com/abo-abo/define-word")
-      (synopsis "Display the definition of word at point.")
+      (synopsis "Display the definition of word at point")
       (description
        "This package will send an anonymous request to https://wordnik.com/ to get the
 definition of word or phrase at point, parse the resulting HTML page, and
