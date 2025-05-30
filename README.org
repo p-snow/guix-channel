@@ -17,8 +17,22 @@ To use this channel, add the following code snippet to your configuration file(~
 #+end_src
 
 * Packages
+
+Emacs
 - emacs-org-web-track :: Web data tracking framework in Org Mode
-- emacs-avy-migemo :: Emacs avy for Japanese
+- emacs-org-clock-convenience :: Convenience functions for org time
+- emacs-org-tidy :: A minor mode to tidy org-mode buffers
+- emacs-whole-line-or-region :: Operate on current line if region undefined
+- emacs-define-word :: Display the definition of word at point
+- emacs-jaword :: Minor-mode for handling Japanese words
+- emacs-try :: Try out Emacs packages
+- emacs-dicom :: Emacs DICOM viewer
+
+Fonts
 - font-ipa :: Japanese font from the Information-technology Promotion Agency
+
+Videos
 - mpv-libarchive (unavailable) :: MPV media player capable of playing archive file
+
+Bittorrent
 - rtorrent-xmlrpc :: rTorrent bittorrent client with XMLRPC support
