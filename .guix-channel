@@ -5,8 +5,4 @@
   (channel
    (name guix)
    (url "https://git.guix.gnu.org/guix.git")
-   (branch "master"))
-  (channel
-   (name guix-jp)
-   (url "https://gitlab.com/guix-jp/channel.git")
-   (branch "main"))))
+   (branch "master"))))

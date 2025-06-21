@@ -4,15 +4,14 @@
   #:use-module (guix build-system emacs)
   #:use-module (guix gexp)
   #:use-module ((guix licenses) #:prefix license:)
-  #:use-module (guix-jp packages emacs-xyz)
-  #:use-module (guix-jp packages migemo)
   #:use-module (gnu packages)
   #:use-module (gnu packages emacs)
   #:use-module (gnu packages emacs-xyz)
   #:use-module (gnu packages texinfo)
   #:use-module (gnu packages image-processing)
   #:use-module (gnu packages video)
-  #:use-module (gnu packages maths))
+  #:use-module (gnu packages maths)
+  #:use-module (p-snow packages migemo))
 
 (define-public emacs-org-web-track
   (package
@@ -223,3 +222,94 @@ without storing the file.")
 Imaging and Communications in Medicine, within Emacs. The images and metadata
 are displayed in regular Emacs buffers.")
     (license license:gpl3+)))
+
+(define-public emacs-japanese-holidays
+  (let ((revision "0")
+        (commit "324b6bf2f55ec050bef49e001caedaabaf4fa35d"))
+    (package
+      (name "emacs-japanese-holidays")
+      (version (git-version "1.190317" revision commit))
+      (source
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+               (url "https://github.com/emacs-jp/japanese-holidays")
+               (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32 "1bxbxczsf0b7jiim2anjh16h243khyrcv4k07qg0yy8c9zrl18aq"))))
+      (build-system emacs-build-system)
+      (arguments
+       (list
+        #:tests? #t
+        #:test-command #~(list "make" "test")))
+      (home-page "https://github.com/emacs-jp/japanese-holidays")
+      (synopsis "Japanese holidays for Emacs calendar")
+      (description
+       "This package defines Japanese holidays for Emacs calendar and provides
+highlighting capabilities for holidays and weekends.")
+      (license license:gpl2+))))
+
+(define-public emacs-migemo
+  (let ((revision "0")
+        (commit "7d78901773da3b503e5c0d5fa14a53ad6060c97f"))
+    (package
+      (name "emacs-migemo")
+      (version (git-version "1.9.2" revision commit))
+      (source
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+               (url "https://github.com/emacs-jp/migemo")
+               (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32 "1098lf50fcm25wb41g1b27wg8hc3g2w6cgjq02sc8pq6qnrr0ql2"))))
+      (build-system emacs-build-system)
+      (arguments
+       (list
+        #:phases
+        #~(modify-phases %standard-phases
+            (add-after 'unpack 'patch-migemo-directory
+              (lambda* (#:key inputs #:allow-other-keys)
+                (emacs-substitute-variables "migemo.el"
+                  ("migemo-directory"
+                   (search-input-directory inputs "share/migemo/utf-8"))
+                  ("migemo-command"
+                   (search-input-file inputs "bin/cmigemo"))))))))
+      (inputs (list cmigemo migemo-dict))
+      (home-page "http://0xcc.net/migemo/")
+      (synopsis "Japanese incremental search in Emacs")
+      (description
+       "@samp{emacs-migemo} enables incremental search of Japanese text using Romaji in
+Emacs.  It serves as an Emacs plugin for @samp{migemo}, which is a backend
+program that allows various editors to offer this functionality.")
+      (license license:gpl2+))))
+
+(define-public emacs-avy-migemo
+  (let ((revision "0")
+        (commit "922a6dd82c0bfa316b0fbb56a9d4dd4ffa5707e7"))
+    (package
+      (name "emacs-avy-migemo")
+      (version (git-version "0.3.2" revision commit))
+      (source
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+               (url "https://github.com/momomo5717/avy-migemo")
+               (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32 "1a4421h15ba7lsnbh8kqm3hvs06fp830wb1nvwgpsk7vmqqi2qgl"))))
+      (build-system emacs-build-system)
+      (arguments
+       '(#:exclude (cons* "^avy-migemo-e\\.g\\.[^/]*\\.el$" %default-exclude)))
+      (propagated-inputs (list emacs-avy emacs-migemo))
+      (home-page "https://github.com/momomo5717/avy-migemo")
+      (synopsis "Emacs Avy for Japanese")
+      (description
+       "This package enables support for Japanese when using Avy in Emacs.  Avy is a
+completion method for characters, words, and similar elements based on a
+balanced decision tree.  With this package, Japanese characters are added to
+Avy's targets, allowing users to narrow down the decision tree using kana input.")
+      (license license:gpl3+))))
