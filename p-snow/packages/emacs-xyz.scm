@@ -14,45 +14,46 @@
   #:use-module (gnu packages maths)
   #:use-module (p-snow packages migemo))
 
-;; (define-public emacs-org-web-track
-;;   (package
-;;     (name "emacs-org-web-track")
-;;     (version "0.1.1")
-;;     (source
-;;      (origin
-;;        (method git-fetch)
-;;        (uri (git-reference
-;;              (url "https://github.com/p-snow/org-web-track.git")
-;;              (commit (string-append "v" version))))
-;;        (file-name (git-file-name name version))
-;;        (sha256
-;;         (base32
-;;          "0ski1bvmxvjr2kf819hjr0lgx1q5y48g4g21mm0wmjcqjngfsh1r"))))
-;;     (build-system emacs-build-system)
-;;     (propagated-inputs
-;;      (list emacs-request
-;;            emacs-enlive
-;;            emacs-gnuplot))
-;;     (native-inputs (list texinfo))
-;;     (inputs (list gnuplot))
-;;     (arguments
-;;      (list
-;;       #:phases #~(modify-phases %standard-phases
-;;                    (add-after 'unpack 'build-info-manual
-;;                      (lambda _
-;;                        (import (guix build utils))
-;;                        (invoke (string-append #$emacs "/bin/emacs")
-;;                                "README.org"
-;;                                "--batch"
-;;                                "-f"
-;;                                "org-texinfo-export-to-info"
-;;                                "--kill") #t)))))
-;;     (home-page "https://github.com/p-snow/org-web-track")
-;;     (synopsis "Web data tracking framework in Org Mode")
-;;     (description
-;;      "A framework in Org Mode to assist users in managing data that changes over time
-;; from web pages and web APIs.")
-;;     (license license:gpl3+)))
+(define-public emacs-org-web-track
+  (package
+    (name "emacs-org-web-track")
+    (version "0.1.1")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+             (url "https://github.com/p-snow/org-web-track.git")
+             (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32
+         "0ski1bvmxvjr2kf819hjr0lgx1q5y48g4g21mm0wmjcqjngfsh1r"))))
+    (build-system emacs-build-system)
+    (propagated-inputs
+     (list emacs-request
+           emacs-enlive
+           emacs-gnuplot))
+    (native-inputs (list texinfo))
+    (inputs (list gnuplot))
+    (arguments
+     (list
+      #:tests? #f
+      #:phases #~(modify-phases %standard-phases
+                   (add-after 'unpack 'build-info-manual
+                     (lambda _
+                       (import (guix build utils))
+                       (invoke (string-append #$emacs "/bin/emacs")
+                               "README.org"
+                               "--batch"
+                               "-f"
+                               "org-texinfo-export-to-info"
+                               "--kill") #t)))))
+    (home-page "https://github.com/p-snow/org-web-track")
+    (synopsis "Web data tracking framework in Org Mode")
+    (description
+     "A framework in Org Mode to assist users in managing data that changes over time
+from web pages and web APIs.")
+    (license license:gpl3+)))
 
 (define-public emacs-org-clock-convenience
   (let ((revision "0")
@@ -104,28 +105,32 @@ timestamps directly from the agenda view.")
        "A minor mode to tidy org-mode buffers.")
       (license license:gpl3+))))
 
-;; (define-public emacs-whole-line-or-region
-;;   (let ((revision "0")
-;;         (commit "052676394c675303d6b953209e5d2ef090fbc45d"))
-;;     (package
-;;       (name "emacs-whole-line-or-region")
-;;       (version (git-version "2.0" revision commit))
-;;       (source
-;;        (origin
-;;          (method git-fetch)
-;;          (uri (git-reference
-;;                (url "https://github.com/purcell/whole-line-or-region.git")
-;;                (commit commit)))
-;;          (file-name (git-file-name name version))
-;;          (sha256
-;;           (base32 "036x6nzij6h7s8ad89clx58hdkcw6kh31blhksdarwl7ssmi2ajg"))))
-;;       (build-system emacs-build-system)
-;;       (home-page "https://github.com/purcell/whole-line-or-region")
-;;       (synopsis "Operate on current line if region undefined")
-;;       (description
-;;        "This minor mode allows functions to operate on the current line if they would
-;; normally operate on a region and region is currently undefined.")
-;;       (license license:gpl3+))))
+(define-public emacs-whole-line-or-region
+  (let ((revision "0")
+        (commit "052676394c675303d6b953209e5d2ef090fbc45d"))
+    (package
+      (name "emacs-whole-line-or-region")
+      (version (git-version "2.0" revision commit))
+      (source
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+               (url "https://github.com/purcell/whole-line-or-region.git")
+               (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32 "036x6nzij6h7s8ad89clx58hdkcw6kh31blhksdarwl7ssmi2ajg"))))
+      (build-system emacs-build-system)
+      (arguments
+       (list
+        #:tests? #t
+        #:test-command #~(list "make" "test")))
+      (home-page "https://github.com/purcell/whole-line-or-region")
+      (synopsis "Operate on current line if region undefined")
+      (description
+       "This minor mode allows functions to operate on the current line if they would
+normally operate on a region and region is currently undefined.")
+      (license license:gpl3+))))
 
 (define-public emacs-define-word
   (let ((revision "0")
