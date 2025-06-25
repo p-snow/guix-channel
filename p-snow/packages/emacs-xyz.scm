@@ -37,6 +37,7 @@
     (inputs (list gnuplot))
     (arguments
      (list
+      #:tests? #f
       #:phases #~(modify-phases %standard-phases
                    (add-after 'unpack 'build-info-manual
                      (lambda _
@@ -120,6 +121,10 @@ timestamps directly from the agenda view.")
          (sha256
           (base32 "036x6nzij6h7s8ad89clx58hdkcw6kh31blhksdarwl7ssmi2ajg"))))
       (build-system emacs-build-system)
+      (arguments
+       (list
+        #:tests? #t
+        #:test-command #~(list "make" "test")))
       (home-page "https://github.com/purcell/whole-line-or-region")
       (synopsis "Operate on current line if region undefined")
       (description
