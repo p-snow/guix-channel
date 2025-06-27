@@ -9,6 +9,7 @@
   #:use-module (gnu packages)
   #:use-module (gnu packages emacs)
   #:use-module (gnu packages emacs-xyz)
+  #:use-module (gnu packages emacs-build)
   #:use-module (gnu packages texinfo)
   #:use-module (gnu packages image-processing)
   #:use-module (gnu packages video)
