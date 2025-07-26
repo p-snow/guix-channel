@@ -23,8 +23,8 @@
      (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://github.com/p-snow/org-web-track.git")
-             (commit (string-append "v" version))))
+              (url "https://github.com/p-snow/org-web-track.git")
+              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
         (base32
@@ -64,8 +64,8 @@ from web pages and web APIs.")
        (origin
          (method git-fetch)
          (uri (git-reference
-               (url "https://github.com/dfeich/org-clock-convenience.git")
-               (commit commit)))
+                (url "https://github.com/dfeich/org-clock-convenience.git")
+                (commit commit)))
          (file-name (git-file-name name version))
          (sha256
           (base32 "1yhzmbflaw1gkg37i0ri6fxidqrkggfkl8mk5bq1s5xfd1jpp971"))))
@@ -91,8 +91,8 @@ timestamps directly from the agenda view.")
        (origin
          (method git-fetch)
          (uri (git-reference
-               (url "https://github.com/jxq0/org-tidy.git")
-               (commit commit)))
+                (url "https://github.com/jxq0/org-tidy.git")
+                (commit commit)))
          (file-name (git-file-name name version))
          (sha256
           (base32 "1rwq53j31vixyhsi7khb1xc0fcqdmqyp7ycq5hinligfxk87sr4s"))))
@@ -114,8 +114,8 @@ timestamps directly from the agenda view.")
        (origin
          (method git-fetch)
          (uri (git-reference
-               (url "https://github.com/purcell/whole-line-or-region.git")
-               (commit commit)))
+                (url "https://github.com/purcell/whole-line-or-region.git")
+                (commit commit)))
          (file-name (git-file-name name version))
          (sha256
           (base32 "036x6nzij6h7s8ad89clx58hdkcw6kh31blhksdarwl7ssmi2ajg"))))
@@ -141,8 +141,8 @@ normally operate on a region and region is currently undefined.")
        (origin
          (method git-fetch)
          (uri (git-reference
-               (url "https://github.com/abo-abo/define-word.git")
-               (commit commit)))
+                (url "https://github.com/abo-abo/define-word.git")
+                (commit commit)))
          (file-name (git-file-name name version))
          (sha256
           (base32 "0h3dasg81f1b08xvz38nyd887pdlv60kj8q50kk2aqlpkr8j0y18"))))
@@ -165,8 +165,8 @@ display it with `message'.")
        (origin
          (method git-fetch)
          (uri (git-reference
-               (url "https://github.com/zk-phi/jaword.git")
-               (commit commit)))
+                (url "https://github.com/zk-phi/jaword.git")
+                (commit commit)))
          (file-name (git-file-name name version))
          (sha256
           (base32 "09gn08c9wz60jc8jh5y3bv7qymp0ciz62bk5sjwkwgnq5mkpsf49"))))
@@ -189,8 +189,8 @@ for Japanese words.")
        (origin
          (method git-fetch)
          (uri (git-reference
-               (url "https://github.com/larstvei/Try.git")
-               (commit commit)))
+                (url "https://github.com/larstvei/Try.git")
+                (commit commit)))
          (file-name (git-file-name name version))
          (sha256
           (base32 "0y26ybdsljph49w2834wssxgdx8ij7b6v4gp8jpgnbx118gr4jsz"))))
@@ -211,8 +211,8 @@ without storing the file.")
      (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://github.com/minad/dicom.git")
-             (commit version)))
+              (url "https://github.com/minad/dicom.git")
+              (commit version)))
        (file-name (git-file-name name version))
        (sha256
         (base32
