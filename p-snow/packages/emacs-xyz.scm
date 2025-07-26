@@ -42,13 +42,11 @@
       #:phases #~(modify-phases %standard-phases
                    (add-after 'unpack 'build-info-manual
                      (lambda _
-                       (import (guix build utils))
-                       (invoke (string-append #$emacs "/bin/emacs")
-                               "README.org"
+                       (invoke "emacs"
                                "--batch"
-                               "-f"
-                               "org-texinfo-export-to-info"
-                               "--kill") #t)))))
+                               "--eval=(require 'ox-texinfo)"
+                               "--eval=(find-file \"README.org\")"
+                               "--eval=(org-texinfo-export-to-info)"))))))
     (home-page "https://github.com/p-snow/org-web-track")
     (synopsis "Web data tracking framework in Org Mode")
     (description
