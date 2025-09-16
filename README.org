@@ -28,9 +28,6 @@ Emacs
 - emacs-try :: Try out Emacs packages
 - emacs-dicom :: Emacs DICOM viewer
 
-Fonts
-- font-ipa :: Japanese font from the Information-technology Promotion Agency
-
 Videos
 - mpv-libarchive (unavailable) :: MPV media player capable of playing archive file
 
