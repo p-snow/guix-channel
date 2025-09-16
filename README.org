@@ -26,7 +26,6 @@ Emacs
 - emacs-define-word :: Display the definition of word at point
 - emacs-jaword :: Minor-mode for handling Japanese words
 - emacs-try :: Try out Emacs packages
-- emacs-dicom :: Emacs DICOM viewer
 
 Videos
 - mpv-libarchive (unavailable) :: MPV media player capable of playing archive file

@@ -11,8 +11,6 @@
   #:use-module (gnu packages emacs-xyz)
   #:use-module (gnu packages emacs-build)
   #:use-module (gnu packages texinfo)
-  #:use-module (gnu packages image-processing)
-  #:use-module (gnu packages video)
   #:use-module (gnu packages maths))
 
 (define-public emacs-org-web-track
@@ -202,28 +200,3 @@ for Japanese words.")
 them. If you pass a URL to a plain text `.el`-file it evaluates the content,
 without storing the file.")
       (license license:gpl3+))))
-
-(define-public emacs-dicom
-  (package
-    (name "emacs-dicom")
-    (version "0.5")
-    (source
-     (origin
-       (method git-fetch)
-       (uri (git-reference
-              (url "https://github.com/minad/dicom.git")
-              (commit version)))
-       (file-name (git-file-name name version))
-       (sha256
-        (base32
-         "02n5wagcznl5fhyfh222kklj4z90pfrqpzm7q97agyx8bynzwr2p"))))
-    (build-system emacs-build-system)
-    (propagated-inputs (list emacs-compat))
-    (inputs (list dcmtk ffmpeg mpv))
-    (home-page "https://github.com/minad/dicom")
-    (synopsis "Emacs DICOM viewer")
-    (description
-     "This package enables the viewing of DICOM files, which stands for Digital
-Imaging and Communications in Medicine, within Emacs. The images and metadata
-are displayed in regular Emacs buffers.")
-    (license license:gpl3+)))
