@@ -169,13 +169,15 @@ display it with `message'.")
          (sha256
           (base32 "09gn08c9wz60jc8jh5y3bv7qymp0ciz62bk5sjwkwgnq5mkpsf49"))))
       (build-system emacs-build-system)
+      (arguments (list #:tests? #f))      ;no tests
       (propagated-inputs (list emacs-tinysegmenter))
       (home-page "http://zk-phi.github.io/")
-      (synopsis "Minor-mode for handling Japanese words")
+      (synopsis "An Emacs minor mode for word-wise Japanese handling")
       (description
-       "This script provides a minor-mode that improves backward/forward-word behavior
-for Japanese words.")
-      (license license:gpl3+))))
+       "@samp{emacs-jaword} enables word-wise cursor movement and transposition
+in Japanese text in Emacs.  It offers more accurate handling of Japanese words by
+utilizing @samp{emacs-tinysegmenter}, a dedicated Japanese tokenizer.")
+      (license license:bsd-3))))
 
 (define-public emacs-try
   (let ((revision "0")
