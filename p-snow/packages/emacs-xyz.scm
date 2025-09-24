@@ -153,32 +153,6 @@ definition of word or phrase at point, parse the resulting HTML page, and
 display it with `message'.")
       (license license:gpl3+))))
 
-(define-public emacs-jaword
-  (let ((revision "0")
-        (commit "783544a265f91b2e568b52311afb36e3691d5ad3"))
-    (package
-      (name "emacs-jaword")
-      (version (git-version "1.0.1" revision commit))
-      (source
-       (origin
-         (method git-fetch)
-         (uri (git-reference
-                (url "https://github.com/zk-phi/jaword.git")
-                (commit commit)))
-         (file-name (git-file-name name version))
-         (sha256
-          (base32 "09gn08c9wz60jc8jh5y3bv7qymp0ciz62bk5sjwkwgnq5mkpsf49"))))
-      (build-system emacs-build-system)
-      (arguments (list #:tests? #f))      ;no tests
-      (propagated-inputs (list emacs-tinysegmenter))
-      (home-page "http://zk-phi.github.io/")
-      (synopsis "An Emacs minor mode for word-wise Japanese handling")
-      (description
-       "@samp{emacs-jaword} enables word-wise cursor movement and transposition
-in Japanese text in Emacs.  It offers more accurate handling of Japanese words by
-utilizing @samp{emacs-tinysegmenter}, a dedicated Japanese tokenizer.")
-      (license license:bsd-3))))
-
 (define-public emacs-try
   (let ((revision "0")
         (commit "8831ded1784df43a2bd56c25ad3d0650cdb9df1d"))

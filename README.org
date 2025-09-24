@@ -24,7 +24,6 @@ Emacs
 - emacs-org-tidy :: A minor mode to tidy org-mode buffers
 - emacs-whole-line-or-region :: Operate on current line if region undefined
 - emacs-define-word :: Display the definition of word at point
-- emacs-jaword :: Minor-mode for handling Japanese words
 - emacs-try :: Try out Emacs packages
 
 Videos
