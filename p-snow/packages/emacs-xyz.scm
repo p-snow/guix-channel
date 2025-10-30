@@ -11,6 +11,7 @@
   #:use-module (gnu packages emacs-xyz)
   #:use-module (gnu packages emacs-build)
   #:use-module (gnu packages texinfo)
+  #:use-module (gnu packages curl)
   #:use-module (gnu packages maths))
 
 (define-public emacs-org-web-track
@@ -175,4 +176,92 @@ display it with `message'.")
        "Try is a package that allows you to try out Emacs packages without installing
 them. If you pass a URL to a plain text `.el`-file it evaluates the content,
 without storing the file.")
+      (license license:gpl3+))))
+
+(define-public emacs-gptel-latest
+  (let ((revision "0")
+        (commit "9dcee1a1787deaed5208d82f5426e2fdbf998fe8"))
+    (package
+      (name "emacs-gptel-latest")
+      (version (git-version "0.9.9" revision commit))
+      (source (origin
+                (method git-fetch)
+                (uri (git-reference
+                       (url "https://github.com/karthink/gptel")
+                       (commit commit)))
+                (file-name (git-file-name name version))
+                (sha256
+                 (base32
+                  "0siy565alqzlggrwx503lgqikxl2f0n7hihqskr18zypz5vk3r36"))))
+      (build-system emacs-build-system)
+      (arguments
+       (list
+        #:phases
+        #~(modify-phases %standard-phases
+            (add-after 'unpack 'use-appropriate-curl
+              (lambda* (#:key inputs #:allow-other-keys)
+                (emacs-substitute-variables "gptel-request.el"
+                  ("gptel-use-curl" (search-input-file inputs "/bin/curl"))))))))
+      (inputs (list curl))
+      (propagated-inputs (list emacs-compat emacs-transient))
+      (home-page "https://github.com/karthink/gptel")
+      (synopsis "GPTel is a simple ChatGPT client for Emacs")
+      (description
+       "GPTel is a simple ChatGPT asynchronous client for Emacs with no external
+dependencies.  It can interact with ChatGPT from any Emacs buffer with ChatGPT
+responses encoded in Markdown or Org markup.  It supports conversations, not
+just one-off queries and multiple independent sessions.  It requires an OpenAI
+API key.")
+      (license license:gpl3+))))
+
+(define-public emacs-gptel-prompts-latest
+  ;; No releases.
+  (let ((commit "a464b3090606592a8605fb2548d60c64753a2911")
+        (revision "1"))
+    (package
+      (name "emacs-gptel-prompts-latest")
+      (version (git-version "1.0" revision commit))
+      (source
+       (origin
+         (uri (git-reference
+                (url "https://github.com/jwiegley/gptel-prompts/")
+                (commit commit)))
+         (method git-fetch)
+         (sha256
+          (base32 "0c8fgj4857hravwn91vn7him3f900prhrxq3lk03f1903nzfpg99"))
+         (file-name (git-file-name name version))))
+      (build-system emacs-build-system)
+      (arguments (list #:tests? #f))    ;no tests
+      (propagated-inputs (list emacs-gptel-latest))
+      (home-page "https://github.com/jwiegley/gptel-prompts/")
+      (synopsis "Alternative Gptel directives management")
+      (description
+       "This package offers an advanced way to manage Gptel directives, using
+files rather than customizing the variable directly.")
+      (license license:gpl2+))))
+
+(define-public emacs-ob-gptel-latest
+  (let ((commit "60e704a390d767a7d06c8d3845ba8786b75f7da3")
+        (revision "2"))
+    (package
+      (name "emacs-ob-gptel-latest")
+      (version (git-version "0.1.0" revision commit))
+      (source
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+                (url "https://github.com/jwiegley/ob-gptel/")
+                (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32
+           "0l4abglx5q8ym2ii6my58001v98jhqd0c0jpvbk4dz2i3h9rsxqv"))))
+      (build-system emacs-build-system)
+      (arguments (list #:tests? #f))    ;no tests
+      (propagated-inputs
+       (list emacs-gptel-latest))
+      (home-page "https://github.com/jwiegley/ob-gptel/")
+      (synopsis "Org Babel support for evaluating @code{gptel} prompts.")
+      (description "@code{ob-gptel} is a backend for Org Babel.  It provides
+an alternative interface to evaluate @{gptel} prompts as Org mode blocks.")
       (license license:gpl3+))))
