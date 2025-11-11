@@ -180,10 +180,10 @@ without storing the file.")
 
 (define-public emacs-gptel-latest
   (let ((revision "0")
-        (commit "9dcee1a1787deaed5208d82f5426e2fdbf998fe8"))
+        (commit "a33e1bb7cbd4a91894f28a66f9e28eb57dd5ea80"))
     (package
       (name "emacs-gptel-latest")
-      (version (git-version "0.9.9" revision commit))
+      (version (git-version "0.9.9.3" revision commit))
       (source (origin
                 (method git-fetch)
                 (uri (git-reference
@@ -191,8 +191,7 @@ without storing the file.")
                        (commit commit)))
                 (file-name (git-file-name name version))
                 (sha256
-                 (base32
-                  "0siy565alqzlggrwx503lgqikxl2f0n7hihqskr18zypz5vk3r36"))))
+                 (base32 "11y6lwnff09nh47f4zmipi4x5hns18qyfaj1rbk12gfidbph7085"))))
       (build-system emacs-build-system)
       (arguments
        (list
