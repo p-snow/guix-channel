@@ -180,7 +180,7 @@ without storing the file.")
 
 (define-public emacs-gptel-latest
   (let ((revision "0")
-        (commit "f4344b8a7950fd6b969b32f84f0fe427a9bc925b"))
+        (commit "1c7e7d64e00bfabd29ca6c56875ded3e6bc78c5f"))
     (package
       (name "emacs-gptel-latest")
       (version (git-version "0.9.9.3" revision commit))
@@ -191,7 +191,7 @@ without storing the file.")
                        (commit commit)))
                 (file-name (git-file-name name version))
                 (sha256
-                 (base32 "1ka5w9sdbf4w9ca805n3w0mnmkzi0ssnpr914qx9qxq0hj5plq3w"))))
+                 (base32 "0pkr3v4v38r3mk4z9v1fwzynfly0kn3j5n5z81php65sc7h6w1jj"))))
       (build-system emacs-build-system)
       (arguments
        (list
@@ -215,7 +215,7 @@ API key.")
 
 (define-public emacs-gptel-prompts-latest
   ;; No releases.
-  (let ((commit "a464b3090606592a8605fb2548d60c64753a2911")
+  (let ((commit "f1c29208c1f0b62918ac6682038da5db4184fc51")
         (revision "1"))
     (package
       (name "emacs-gptel-prompts-latest")
@@ -227,7 +227,7 @@ API key.")
                 (commit commit)))
          (method git-fetch)
          (sha256
-          (base32 "0c8fgj4857hravwn91vn7him3f900prhrxq3lk03f1903nzfpg99"))
+          (base32 "1bw98biq7m1xigjmgm3w7dzac99vww619d0n24rq15kcrra7sg84"))
          (file-name (git-file-name name version))))
       (build-system emacs-build-system)
       (arguments (list #:tests? #f))    ;no tests
