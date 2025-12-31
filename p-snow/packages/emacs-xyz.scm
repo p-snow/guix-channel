@@ -15,7 +15,56 @@
   #:use-module (gnu packages rust-apps)
   #:use-module (gnu packages admin)
   #:use-module (gnu packages base)
+  #:use-module (gnu packages search)
   #:use-module (gnu packages maths))
+
+(define-public emacs-consult-ghq
+  (package
+    (name "emacs-consult-ghq")
+    (version "0.0.5")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/tomoya/consult-ghq")
+              (commit version)))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32
+         "1zvbz7xpgsg8y9ak8cvqhj415ym0i5sxv6b2cigvsb8j6kmp9cch"))))
+    (propagated-inputs
+     (list emacs-consult))
+    (build-system emacs-build-system)
+    (home-page "https://github.com/tomoya/consult-ghq")
+    (synopsis "Ghq interface using consult")
+    (description
+     "This packaage provides ghq interface using Consult.")
+    (license license:gpl3+)))
+
+(define-public emacs-consult-recoll
+  (package
+    (name "emacs-consult-recoll")
+    (version "1.0.0")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://codeberg.org/jao/consult-recoll")
+              (commit version)))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32
+         "0w7c41fz6mm0i8annxr68icrcdmindafkvd3fnnnyw3ncm8vsygb"))))
+    (propagated-inputs
+     (list emacs-consult))
+    (inputs (list recoll))
+    (build-system emacs-build-system)
+    (home-page "https://codeberg.org/jao/consult-recoll")
+    (synopsis "recoll queries in emacs using consult")
+    (description
+     "A `consult-recoll' command to perform interactive queries (including life
+previews of documment snippets) over your Recoll index, using consult.")
+    (license license:gpl3+)))
 
 (define-public emacs-org-web-track
   (package
