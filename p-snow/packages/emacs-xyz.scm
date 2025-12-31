@@ -56,6 +56,31 @@
 from web pages and web APIs.")
     (license license:gpl3+)))
 
+(define-public emacs-org-tag-tree
+  (package
+    (name "emacs-org-tag-tree")
+    (version "0.1")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/p-snow/org-tag-tree")
+              (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32
+         "0vq29bb6v8i4rbancp46rvg7sr2l6vllp12j9lm0ciaj9akcl279"))))
+    (build-system emacs-build-system)
+    (arguments
+     (list
+      #:tests? #t
+      #:test-command #~(list "make" "test")))
+    (home-page "https://github.com/p-snow/org-tag-tree")
+    (synopsis "Define Org-mode tag hierarchies from Org subtrees")
+    (description
+     "org-tag-tree lets you describe Org tag hierarchies as ordinary Org trees.")
+    (license license:gpl3+)))
+
 (define-public emacs-org-clock-convenience
   (let ((revision "0")
         (commit "5a9e32af581ecca0359de1815e3d37b563f9f8b2"))
