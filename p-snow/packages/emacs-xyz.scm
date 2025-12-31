@@ -18,6 +18,33 @@
   #:use-module (gnu packages search)
   #:use-module (gnu packages maths))
 
+(define-public emacs-minuet
+  (package
+    (name "emacs-minuet")
+    (version "0.7.1")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/milanglacier/minuet-ai.el")
+              (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32
+         "085iclc2766sv6mxim7ppxdcss769zax2gk92wpj5130zpayngzq"))))
+    (propagated-inputs
+     (list emacs-plz emacs-dash))
+    (build-system emacs-build-system)
+    (home-page "https://github.com/milanglacier/minuet-ai.el")
+    (synopsis "AI-powered code completion for Emacs using multiple LLM backends")
+    (description
+     "Minuet is an Emacs package that provides AI-powered code completion and
+ suggestions.  It supports various Large Language Model (LLM) backends,
+ including OpenAI, Anthropic, Gemini, and local providers via Ollama or
+ llama.cpp.  Minuet features configurable inline completion, similar to GitHub
+ Copilot, and can be integrated with existing Emacs completion frameworks.")
+    (license license:gpl3+)))
+
 (define-public emacs-consult-ghq
   (package
     (name "emacs-consult-ghq")
