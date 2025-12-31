@@ -12,6 +12,9 @@
   #:use-module (gnu packages emacs-build)
   #:use-module (gnu packages texinfo)
   #:use-module (gnu packages curl)
+  #:use-module (gnu packages rust-apps)
+  #:use-module (gnu packages admin)
+  #:use-module (gnu packages base)
   #:use-module (gnu packages maths))
 
 (define-public emacs-org-web-track
@@ -263,4 +266,41 @@ files rather than customizing the variable directly.")
       (synopsis "Org Babel support for evaluating @code{gptel} prompts.")
       (description "@code{ob-gptel} is a backend for Org Babel.  It provides
 an alternative interface to evaluate @{gptel} prompts as Org mode blocks.")
+      (license license:gpl3+))))
+
+(define-public emacs-gptel-agent-latest
+  (let ((commit "99a8b940271fbe68cdfb7c2329d090dc4ef04b99")
+        (revision "0"))
+    (package
+      (name "emacs-gptel-agent-latest")
+      (version (git-version "20251210.453" revision commit))
+      (source
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+                (url "https://github.com/karthink/gptel-agent")
+                (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32
+           "1bmvdya60l120a18pl4j10n1pydmxr376f93d66s1dwkxp8jkiwy"))))
+      (build-system emacs-build-system)
+      (arguments
+       (list
+        #:include #~(cons "^agents\\/" %default-include)))
+      (propagated-inputs
+       (list emacs-compat
+             emacs-gptel-latest
+             emacs-yaml
+             emacs-orderless))
+      (inputs
+       (list ripgrep
+             tree
+             patch))
+      (home-page "https://github.com/karthink/gptel-agent")
+      (synopsis "Agentic LLM use for gptel")
+      (description
+       "gptel-agent is a collection of tools and prompts to use gptel agentically
+with any LLM, to autonomously perform tasks.  It has access to the web, local
+files, Emacs state, and Bash.")
       (license license:gpl3+))))
