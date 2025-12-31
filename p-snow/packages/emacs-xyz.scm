@@ -56,7 +56,7 @@
         (base32
          "0w7c41fz6mm0i8annxr68icrcdmindafkvd3fnnnyw3ncm8vsygb"))))
     (propagated-inputs
-     (list emacs-consult))
+     (list emacs-consult emacs-org-reveal))
     (inputs (list recoll))
     (build-system emacs-build-system)
     (home-page "https://codeberg.org/jao/consult-recoll")
