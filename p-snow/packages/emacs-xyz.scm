@@ -131,6 +131,28 @@ timestamps directly from the agenda view.")
        "A minor mode to tidy org-mode buffers.")
       (license license:gpl3+))))
 
+(define-public emacs-org-hide-drawers
+  (package
+    (name "emacs-org-hide-drawers")
+    (version "2.0.0")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/krisbalintona/org-hide-drawers")
+              (commit version)))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32
+         "1s1wlhbd0k10p1d93f7vi29jsm2kh2ws7bqwc9r2fjqd0hgcaz8x"))))
+    (build-system emacs-build-system)
+    (home-page "https://github.com/krisbalintona/org-hide-drawers")
+    (synopsis "Hide drawers in org-mode with overlays")
+    (description
+     "Hide drawers in org-mode buffers using overlays.  These overlays replace the
+visual display of drawers using their \"display\" property.")
+    (license license:gpl3+)))
+
 (define-public emacs-whole-line-or-region
   (let ((revision "0")
         (commit "052676394c675303d6b953209e5d2ef090fbc45d"))
