@@ -153,6 +153,31 @@ timestamps directly from the agenda view.")
 visual display of drawers using their \"display\" property.")
     (license license:gpl3+)))
 
+(define-public emacs-org-expose-emphasis-markers
+  (package
+    (name "emacs-org-expose-emphasis-markers")
+    (version "0.2.1")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/lorniu/org-expose-emphasis-markers")
+              (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32
+         "1sn90262rcrqmmwy45dz8vdd10sv7d5m2dmzz79f5lj6kh90h5zw"))))
+    (build-system emacs-build-system)
+    (home-page "https://github.com/lorniu/org-expose-emphasis-markers")
+    (synopsis "Automatically show hidden emphasis markers at point in org mode")
+    (description
+     "Automatically show hidden emphasis markers at point in org mode. This is useful
+for editing org file when `org-hide-emphasis-markers' is on. In org mode, hide
+emphasis markers can make reading nice, but not good for editing. Here provide a
+mode to let hidden markers auto expose when the cursor on, and auto hide when
+cursor leave.")
+    (license license:gpl3+)))
+
 (define-public emacs-whole-line-or-region
   (let ((revision "0")
         (commit "052676394c675303d6b953209e5d2ef090fbc45d"))
