@@ -233,7 +233,7 @@ cursor leave.")
 
 (define-public emacs-whole-line-or-region
   (let ((revision "0")
-        (commit "052676394c675303d6b953209e5d2ef090fbc45d"))
+        (commit "e854a446d36bf0af54b13730ceaaf0c75e636662"))
     (package
       (name "emacs-whole-line-or-region")
       (version (git-version "2.0" revision commit))
@@ -245,7 +245,7 @@ cursor leave.")
                 (commit commit)))
          (file-name (git-file-name name version))
          (sha256
-          (base32 "036x6nzij6h7s8ad89clx58hdkcw6kh31blhksdarwl7ssmi2ajg"))))
+          (base32 "1gphhl8l0hl7wsxih59bbc4a3p5wridhwcqp7lnc9bs89xhb2z6j"))))
       (build-system emacs-build-system)
       (arguments
        (list
