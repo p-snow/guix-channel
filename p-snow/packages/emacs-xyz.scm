@@ -184,29 +184,6 @@ from web pages and web APIs.")
 timestamps directly from the agenda view.")
       (license license:gpl3+))))
 
-(define-public emacs-org-tidy
-  (let ((revision "0")
-        (commit "0bea3a2ceaa999e0ad195ba525c5c1dcf5fba43b"))
-    (package
-      (name "emacs-org-tidy")
-      (version (git-version "0.1" revision commit))
-      (source
-       (origin
-         (method git-fetch)
-         (uri (git-reference
-                (url "https://github.com/jxq0/org-tidy.git")
-                (commit commit)))
-         (file-name (git-file-name name version))
-         (sha256
-          (base32 "1rwq53j31vixyhsi7khb1xc0fcqdmqyp7ycq5hinligfxk87sr4s"))))
-      (propagated-inputs (list emacs-dash))
-      (build-system emacs-build-system)
-      (home-page "https://github.com/jxq0/org-tidy")
-      (synopsis "A minor mode to tidy org-mode buffers")
-      (description
-       "A minor mode to tidy org-mode buffers.")
-      (license license:gpl3+))))
-
 (define-public emacs-org-hide-drawers
   (package
     (name "emacs-org-hide-drawers")

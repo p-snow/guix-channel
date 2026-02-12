@@ -21,7 +21,6 @@ To use this channel, add the following code snippet to your configuration file(~
 Emacs
 - emacs-org-web-track :: Web data tracking framework in Org Mode
 - emacs-org-clock-convenience :: Convenience functions for org time
-- emacs-org-tidy :: A minor mode to tidy org-mode buffers
 - emacs-whole-line-or-region :: Operate on current line if region undefined
 - emacs-define-word :: Display the definition of word at point
 - emacs-try :: Try out Emacs packages
