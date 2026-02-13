@@ -395,7 +395,7 @@ an alternative interface to evaluate @{gptel} prompts as Org mode blocks.")
       (license license:gpl3+))))
 
 (define-public emacs-gptel-agent-latest
-  (let ((commit "99a8b940271fbe68cdfb7c2329d090dc4ef04b99")
+  (let ((commit "2e6ba04c393ad95973a48483147046683454af86")
         (revision "0"))
     (package
       (name "emacs-gptel-agent-latest")
@@ -409,7 +409,7 @@ an alternative interface to evaluate @{gptel} prompts as Org mode blocks.")
          (file-name (git-file-name name version))
          (sha256
           (base32
-           "1bmvdya60l120a18pl4j10n1pydmxr376f93d66s1dwkxp8jkiwy"))))
+           "0rc9bqhvmsc228z3jy89ay0w314w530rrxr7mpkr8djbp52halj0"))))
       (build-system emacs-build-system)
       (arguments
        (list
