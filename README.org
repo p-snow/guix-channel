@@ -23,7 +23,6 @@ Emacs
 - emacs-org-clock-convenience :: Convenience functions for org time
 - emacs-whole-line-or-region :: Operate on current line if region undefined
 - emacs-define-word :: Display the definition of word at point
-- emacs-try :: Try out Emacs packages
 
 Videos
 - mpv-libarchive (unavailable) :: MPV media player capable of playing archive file

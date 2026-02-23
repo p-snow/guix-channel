@@ -207,30 +207,6 @@ definition of word or phrase at point, parse the resulting HTML page, and
 display it with `message'.")
       (license license:gpl3+))))
 
-(define-public emacs-try
-  (let ((revision "0")
-        (commit "8831ded1784df43a2bd56c25ad3d0650cdb9df1d"))
-    (package
-      (name "emacs-try")
-      (version (git-version "0.0.1" revision commit))
-      (source
-       (origin
-         (method git-fetch)
-         (uri (git-reference
-                (url "https://github.com/larstvei/Try.git")
-                (commit commit)))
-         (file-name (git-file-name name version))
-         (sha256
-          (base32 "0y26ybdsljph49w2834wssxgdx8ij7b6v4gp8jpgnbx118gr4jsz"))))
-      (build-system emacs-build-system)
-      (home-page "https://github.com/larstvei/try")
-      (synopsis "Try out Emacs packages")
-      (description
-       "Try is a package that allows you to try out Emacs packages without installing
-them. If you pass a URL to a plain text `.el`-file it evaluates the content,
-without storing the file.")
-      (license license:gpl3+))))
-
 (define-public emacs-minuet-latest
   (let ((revision "0")
         (commit "cf31d5f31f271d9b97352146fc614e9475a4726d"))
