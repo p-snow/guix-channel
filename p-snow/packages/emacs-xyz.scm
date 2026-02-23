@@ -18,29 +18,6 @@
   #:use-module (gnu packages search)
   #:use-module (gnu packages maths))
 
-(define-public emacs-consult-ghq
-  (package
-    (name "emacs-consult-ghq")
-    (version "0.0.5")
-    (source
-     (origin
-       (method git-fetch)
-       (uri (git-reference
-              (url "https://github.com/tomoya/consult-ghq")
-              (commit version)))
-       (file-name (git-file-name name version))
-       (sha256
-        (base32
-         "1zvbz7xpgsg8y9ak8cvqhj415ym0i5sxv6b2cigvsb8j6kmp9cch"))))
-    (propagated-inputs
-     (list emacs-consult))
-    (build-system emacs-build-system)
-    (home-page "https://github.com/tomoya/consult-ghq")
-    (synopsis "Ghq interface using consult")
-    (description
-     "This packaage provides ghq interface using Consult.")
-    (license license:gpl3+)))
-
 (define-public emacs-org-web-track
   (package
     (name "emacs-org-web-track")
