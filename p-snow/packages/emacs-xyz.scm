@@ -41,31 +41,6 @@
      "This packaage provides ghq interface using Consult.")
     (license license:gpl3+)))
 
-(define-public emacs-consult-recoll
-  (package
-    (name "emacs-consult-recoll")
-    (version "1.0.0")
-    (source
-     (origin
-       (method git-fetch)
-       (uri (git-reference
-              (url "https://codeberg.org/jao/consult-recoll")
-              (commit version)))
-       (file-name (git-file-name name version))
-       (sha256
-        (base32
-         "0w7c41fz6mm0i8annxr68icrcdmindafkvd3fnnnyw3ncm8vsygb"))))
-    (propagated-inputs
-     (list emacs-consult emacs-org-reveal))
-    (inputs (list recoll))
-    (build-system emacs-build-system)
-    (home-page "https://codeberg.org/jao/consult-recoll")
-    (synopsis "recoll queries in emacs using consult")
-    (description
-     "A `consult-recoll' command to perform interactive queries (including life
-previews of documment snippets) over your Recoll index, using consult.")
-    (license license:gpl3+)))
-
 (define-public emacs-org-web-track
   (package
     (name "emacs-org-web-track")
