@@ -207,6 +207,31 @@ definition of word or phrase at point, parse the resulting HTML page, and
 display it with `message'.")
       (license license:gpl3+))))
 
+(define-public emacs-pangu-spacing
+  (let ((revision "0")
+        (commit "6509df9c90bbdb9321a756f7ea15bb2b60ed2530"))
+    (package
+      (name "emacs-pangu-spacing")
+      (version (git-version "0.4" revision commit))
+      (source (origin
+                (method git-fetch)
+                (uri (git-reference
+                       (url "https://github.com/coldnew/pangu-spacing")
+                       (commit commit)))
+                (file-name (git-file-name name version))
+                (sha256
+                 (base32 "1i52qmky0azwp5pn20nh1zrikn71m95v4hgfc3l3cgq2rqkzzm8x"))))
+      (propagated-inputs
+       (list emacs-plz emacs-dash))
+      (build-system emacs-build-system)
+      (home-page "https://github.com/coldnew/pangu-spacing")
+      (synopsis "Emacs minor-mode to add space between Chinese/Japanese/Korean and English characters. ")
+      (description
+       "pangu-spacing-mode is an minor-mode to auto add space between Chinese and
+English characters. Note that these whitespace characters are not really added
+to your file. It's just a local visual change.")
+      (license license:gpl3+))))
+
 (define-public emacs-minuet-latest
   (let ((revision "0")
         (commit "cf31d5f31f271d9b97352146fc614e9475a4726d"))
