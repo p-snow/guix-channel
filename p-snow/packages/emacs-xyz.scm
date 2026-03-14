@@ -263,7 +263,7 @@ to your file. It's just a local visual change.")
 
 (define-public emacs-gptel-latest
   (let ((revision "0")
-        (commit "bc5e4489db1dbb17dae211ce10121b12cc43c756"))
+        (commit "05f3f4d93bbf4003433177e4064c611156246af1"))
     (package
       (name "emacs-gptel-latest")
       (version (git-version "0.9.9.4" revision commit))
@@ -274,7 +274,7 @@ to your file. It's just a local visual change.")
                        (commit commit)))
                 (file-name (git-file-name name version))
                 (sha256
-                 (base32 "03fxiy8r6vjr1wndx6lvv982ffzad636rh0lkv8x6a8mcx5w1gfn"))))
+                 (base32 "0ipzrdhpjnpjyvr4cb08w2ann40rx620zr6qvpcv38vvqy4d0fh3"))))
       (build-system emacs-build-system)
       (arguments
        (list
