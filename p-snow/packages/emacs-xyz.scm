@@ -233,6 +233,34 @@ English characters. Note that these whitespace characters are not really added
 to your file. It's just a local visual change.")
       (license license:gpl3+))))
 
+(define-public emacs-tinee
+  (package
+    (name "emacs-tinee")
+    (version "0.4.0")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://codeberg.org/tusharhero/tinee")
+              (commit version)))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "1i6q7az7qprynkyiff64kb6k39j7az8wf9ac26f2cnyjb82wvbkd"))))
+    (build-system emacs-build-system)
+    (home-page "https://codeberg.org/tusharhero/tinee")
+    (synopsis "This Is Not Emacs Everywhere, in the sense that it's not as featureful as Emacs-everywhere, and hence tinee.")
+    (description
+     "Tinee allows you to use GNU Emacs for writing anywhere on your
+system. That is, compose your text from within Emacs, and automatically send it
+to any text area.
+
+The package name stands for @code{This Is Not Emacs Everywhere}, as it is not as
+featureful or ambitious (in terms of supported systems) as
+@code{emacs-everywhere}, but it is still good enough while being tinee.
+
+It only supports Wayland GNU/Linux systems.")
+    (license license:gpl3+)))
+
 (define-public emacs-minuet-latest
   (let ((revision "0")
         (commit "cf31d5f31f271d9b97352146fc614e9475a4726d"))
