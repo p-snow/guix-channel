@@ -291,7 +291,7 @@ It only supports Wayland GNU/Linux systems.")
 
 (define-public emacs-gptel-latest
   (let ((revision "0")
-        (commit "4747ffa251af84dbb6fe181f5d2b484ec2e442a7"))
+        (commit "3ad7a36250eaed8b68bb7fbd264877ef62bdf2b5"))
     (package
       (name "emacs-gptel-latest")
       (version (git-version "0.9.9.4" revision commit))
@@ -302,7 +302,7 @@ It only supports Wayland GNU/Linux systems.")
                        (commit commit)))
                 (file-name (git-file-name name version))
                 (sha256
-                 (base32 "1f75lp5wffdmj45zpiaxvnpwikms2gxqs0r206749vyz8p27c737"))))
+                 (base32 "11pf3cl44dnp7k34vldwj0x216rmasd2x6liglr7qmxs3yf5hnkq"))))
       (build-system emacs-build-system)
       (arguments
        (list
