@@ -291,7 +291,7 @@ It only supports Wayland GNU/Linux systems.")
 
 (define-public emacs-gptel-latest
   (let ((revision "0")
-        (commit "a0adf16a3c9f1aadcb3ed92b76be371f2e5b5219"))
+        (commit "71b9f9414536c4cd35d8c02d3c8ad4fc4aea8718"))
     (package
       (name "emacs-gptel-latest")
       (version (git-version "0.9.9.4" revision commit))
@@ -302,7 +302,7 @@ It only supports Wayland GNU/Linux systems.")
                        (commit commit)))
                 (file-name (git-file-name name version))
                 (sha256
-                 (base32 "080zg11wxf127pwx07kbx6fyz48gp02sj3aipdyn8v2kmiz1l93k"))))
+                 (base32 "0aaznd1ihv1iv3i0hz8gsp7x6nig7q1ypjwngag7h2v400g52x2l"))))
       (build-system emacs-build-system)
       (arguments
        (list
@@ -376,20 +376,20 @@ an alternative interface to evaluate @{gptel} prompts as Org mode blocks.")
       (license license:gpl3+))))
 
 (define-public emacs-gptel-agent-latest
-  (let ((commit "90aaaede809fa32167507032cddf1fbe769dcd7d")
+  (let ((commit "e2ef97d6b566b2ad751c8a0a87b8272710c95808")
         (revision "0"))
     (package
       (name "emacs-gptel-agent-latest")
       (version (git-version "20251210.453" revision commit))
       (source
        (origin
-         (method git-fetch)
-         (uri (git-reference
-                (url "https://github.com/karthink/gptel-agent")
-                (commit commit)))
-         (file-name (git-file-name name version))
-         (sha256
-          (base32 "1a6c1rsgndvm1hdkc0107ai57bq2049ia2xi8hpvdik5pkfa0p0y"))))
+        (method git-fetch)
+        (uri (git-reference
+               (url "https://github.com/karthink/gptel-agent")
+               (commit commit)))
+        (file-name (git-file-name name version))
+        (sha256
+         (base32 "0k88fav640ckjjv269zx6zlhjghr551bcamx7argvs8i5ca7r9jx"))))
       (build-system emacs-build-system)
       (arguments
        (list
