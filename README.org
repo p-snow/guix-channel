@@ -33,7 +33,6 @@ Emacs
 - emacs-gptel-prompts-latest :: Alternative Gptel directives management
 - emacs-ob-gptel-latest :: Org Babel support for evaluating gptel prompts
 - emacs-gptel-agent-latest :: Agentic LLM use for gptel
-- emacs-org-edit-indirect :: Edit any Org element the same way as source blocks
 
 Videos
 - mpv-libarchive (unavailable) :: MPV media player capable of playing archive file
