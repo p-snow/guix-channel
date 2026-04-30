@@ -410,3 +410,29 @@ an alternative interface to evaluate @{gptel} prompts as Org mode blocks.")
 with any LLM, to autonomously perform tasks.  It has access to the web, local
 files, Emacs state, and Bash.")
       (license license:gpl3+))))
+
+(define-public emacs-org-edit-indirect
+  (let ((revision "0")
+        (commit "62894ac7b8b85eb03766f66072b0be10ffb6898e"))
+    (package
+      (name "emacs-org-edit-indirect")
+      (version (git-version "1.1.0" revision commit))
+      (source
+       (origin
+        (method git-fetch)
+        (uri (git-reference
+               (url "https://github.com/agzam/org-edit-indirect.el")
+               (commit commit)))
+        (file-name (git-file-name name version))
+        (sha256
+         (base32 "18wb167ansh0b5k8df2sc1v7ps3l0jb1l63gp09d1gcjdzfd6hvn"))))
+      (build-system emacs-build-system)
+      (propagated-inputs
+       (list emacs-edit-indirect))
+      (home-page "https://github.com/agzam/org-edit-indirect.el")
+      (synopsis "Edit any Org element the same way as source blocks")
+      (description
+       "This package extends `org-edit-special' so it can be used to edit
+(almost) any type of block in Org-mode, things like quote, verse, comment
+blocks, etc.")
+      (license license:gpl3+))))
