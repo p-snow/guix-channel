@@ -20,9 +20,20 @@ To use this channel, add the following code snippet to your configuration file(~
 
 Emacs
 - emacs-org-web-track :: Web data tracking framework in Org Mode
+- emacs-org-tag-tree :: Define Org-mode tag hierarchies from Org subtrees
 - emacs-org-clock-convenience :: Convenience functions for org time
+- emacs-org-hide-drawers :: Hide drawers in org-mode with overlays
+- emacs-org-expose-emphasis-markers :: Automatically show hidden emphasis markers at point in org mode
 - emacs-whole-line-or-region :: Operate on current line if region undefined
 - emacs-define-word :: Display the definition of word at point
+- emacs-pangu-spacing :: Add space between Chinese/Japanese/Korean and English characters
+- emacs-tinee :: Use Emacs for writing in any text area (Wayland)
+- emacs-minuet-latest :: AI-powered code completion for Emacs using multiple LLM backends
+- emacs-gptel-latest :: Simple ChatGPT client for Emacs
+- emacs-gptel-prompts-latest :: Alternative Gptel directives management
+- emacs-ob-gptel-latest :: Org Babel support for evaluating gptel prompts
+- emacs-gptel-agent-latest :: Agentic LLM use for gptel
+- emacs-org-edit-indirect :: Edit any Org element the same way as source blocks
 
 Videos
 - mpv-libarchive (unavailable) :: MPV media player capable of playing archive file
