@@ -1,0 +1,242 @@
+#!/usr/bin/env bash
+#
+# update-latest - Update -latest suffix Guix packages to latest upstream commits
+#
+# Usage: update-latest [OPTIONS] [PACKAGE-NAME]
+#
+# Options:
+#   -h, --help     Show this help message
+#
+# Arguments:
+#   PACKAGE-NAME   Optional package name (e.g., emacs-gptel-latest)
+#                 If omitted, updates all -latest packages
+#
+# Examples:
+#   update-latest                  # Update all -latest packages
+#   update-latest emacs-gptel-latest  # Update specific package
+#   update-latest -h               # Show help
+#
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CHANNEL_DIR="$(dirname "$SCRIPT_DIR")"
+PACKAGES_DIR="$CHANNEL_DIR/p-snow/packages"
+
+show_help() {
+    sed -n '3,17p' "$0" | sed 's/^#\s*//'
+    exit 0
+}
+
+extract_package_info() {
+    local pkg_name="$1"
+    local file="$2"
+
+    local commit revision url
+
+    local section
+    section=$(grep -A30 "define-public $pkg_name" "$file" | head -30)
+
+    commit=$(echo "$section" | grep -Eo '\(commit "[^"]+"\)' | head -1 | sed 's/.*"\([^"]*\)".*/\1/')
+    revision=$(echo "$section" | grep -Eo '\(revision "[^"]+"\)' | head -1 | sed 's/.*"\([^"]*\)".*/\1/')
+    url=$(echo "$section" | grep -Eo '\(url "[^"]+"\)' | head -1 | sed 's/.*"\([^"]*\)".*/\1/')
+
+    echo "$commit|$revision|$url"
+}
+
+get_latest_commit() {
+    local url="$1"
+    git ls-remote "$url" | head -1 | cut -f1
+}
+
+calculate_hash() {
+    local url="$1"
+    local commit="$2"
+
+    local tmp_dir
+    tmp_dir=$(mktemp -d)
+    trap "rm -rf $tmp_dir" EXIT
+
+    if ! git clone "$url" "$tmp_dir/src" 2>/dev/null; then
+        return 1
+    fi
+
+    if ! (cd "$tmp_dir/src" && git checkout "$commit") 2>/dev/null; then
+        return 1
+    fi
+
+    guix hash -r "$tmp_dir/src"
+}
+
+update_package() {
+    local pkg_name="$1"
+    local file="$2"
+    local old_commit="$3"
+    local new_commit="$4"
+    local new_hash="$5"
+
+    local old_line new_line
+
+    old_line="(commit \"$old_commit\")"
+    new_line="(commit \"$new_commit\")"
+    sed -i "s/$old_line/$new_line/g" "$file"
+
+    local old_hash
+    old_hash=$(grep -A50 "define-public $pkg_name" "$file" | grep -E '^\s+\(base32 "' | head -1 | sed 's/.*"\([^"]*\)".*/\1/')
+
+    if [[ -n "$old_hash" && "$old_hash" != "$new_hash" ]]; then
+        old_line="(base32 \"$old_hash\")"
+        new_line="(base32 \"$new_hash\")"
+        sed -i "s/$old_line/$new_line/g" "$file"
+    fi
+}
+
+verify_build() {
+    local pkg_name="$1"
+    local output
+    output=$(guix build -L "$CHANNEL_DIR" "$pkg_name" 2>&1) || return 1
+    echo "$output" | tail -5
+    return 0
+}
+
+find_package_file() {
+    local pkg_name="$1"
+    for file in "$PACKAGES_DIR"/*.scm; do
+        [[ -e "$file" ]] || continue
+        if grep -q "define-public $pkg_name" "$file"; then
+            echo "$file"
+            return 0
+        fi
+    done
+    return 1
+}
+
+find_all_latest_packages() {
+    declare -A pkg_map
+
+    for file in "$PACKAGES_DIR"/*.scm; do
+        [[ -e "$file" ]] || continue
+        while IFS= read -r line; do
+            pkg_name=$(echo "$line" | sed -e 's/.*(define-public //' -e 's/ .*//')
+            pkg_map["$pkg_name"]="$file"
+        done < <(grep -n "define-public" "$file" | grep "\-latest" | cut -d: -f2-)
+    done
+
+    for pkg_name in "${!pkg_map[@]}"; do
+        echo "${pkg_map[$pkg_name]}|$pkg_name"
+    done
+}
+
+process_package() {
+    local pkg_name="$1"
+    local file="$2"
+
+    echo ""
+    echo "=== Processing: $pkg_name ==="
+
+    local info old_commit revision url new_commit new_hash
+
+    info=$(extract_package_info "$pkg_name" "$file")
+    old_commit=$(echo "$info" | cut -d'|' -f1)
+    revision=$(echo "$info" | cut -d'|' -f2)
+    url=$(echo "$info" | cut -d'|' -f3)
+
+    if [[ -z "$url" || -z "$old_commit" ]]; then
+        echo "Skipping: could not extract info"
+        return 1
+    fi
+
+    echo "URL: $url"
+    echo "Current commit: $old_commit"
+
+    new_commit=$(get_latest_commit "$url")
+    echo "Latest commit: $new_commit"
+
+    if [[ "$old_commit" == "$new_commit" ]]; then
+        echo "No update needed"
+        return 2
+    fi
+
+    echo "Commit changed! Calculating new hash..."
+    new_hash=$(calculate_hash "$url" "$new_commit")
+
+    if [[ -z "$new_hash" ]]; then
+        echo "Failed to calculate hash"
+        return 1
+    fi
+
+    echo "New hash: $new_hash"
+
+    update_package "$pkg_name" "$file" "$old_commit" "$new_commit" "$new_hash"
+    echo "Updated package definition"
+
+    echo "Verifying build..."
+    if verify_build "$pkg_name"; then
+        echo "Build successful!"
+        return 0
+    else
+        echo "Build failed!"
+        return 1
+    fi
+}
+
+main() {
+    local target_pkg=""
+
+    if [[ $# -gt 0 ]]; then
+        case "$1" in
+            -h|--help)
+                show_help
+                ;;
+            *)
+                target_pkg="$1"
+                ;;
+        esac
+    fi
+
+    echo "Finding -latest packages..."
+
+    local -a pkg_list=()
+    local updated=0
+    local failed=0
+    local skipped=0
+
+    if [[ -n "$target_pkg" ]]; then
+        local file
+        file=$(find_package_file "$target_pkg")
+        if [[ -z "$file" ]]; then
+            echo "Package not found: $target_pkg"
+            exit 1
+        fi
+        pkg_list=("$file|$target_pkg")
+    else
+        while IFS= read -r line; do
+            pkg_list+=("$line")
+        done < <(find_all_latest_packages)
+    fi
+
+    echo "Found ${#pkg_list[@]} packages"
+
+    for entry in "${pkg_list[@]}"; do
+        local file pkg_name result
+        file=$(echo "$entry" | cut -d'|' -f1)
+        pkg_name=$(echo "$entry" | cut -d'|' -f2)
+
+        process_package "$pkg_name" "$file"
+        result=$?
+
+        if [[ $result -eq 0 ]]; then
+            ((updated++))
+        elif [[ $result -eq 1 ]]; then
+            ((failed++))
+        elif [[ $result -eq 2 ]]; then
+            ((skipped++))
+        fi
+    done
+
+    echo ""
+    echo "=== Summary ==="
+    echo "Updated: $updated"
+    echo "Failed: $failed"
+    echo "Skipped: $skipped"
+}
+
+main "$@"
