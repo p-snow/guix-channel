@@ -291,10 +291,10 @@ It only supports Wayland GNU/Linux systems.")
 
 (define-public emacs-gptel-latest
   (let ((revision "0")
-        (commit "71b9f9414536c4cd35d8c02d3c8ad4fc4aea8718"))
+        (commit "675a19aa68df693fa26070bf19b5d6fd53f2990f"))
     (package
       (name "emacs-gptel-latest")
-      (version (git-version "0.9.9.4" revision commit))
+      (version (git-version "0.9.9.5" revision commit))
       (source (origin
                 (method git-fetch)
                 (uri (git-reference
@@ -302,18 +302,42 @@ It only supports Wayland GNU/Linux systems.")
                        (commit commit)))
                 (file-name (git-file-name name version))
                 (sha256
-                 (base32 "0aaznd1ihv1iv3i0hz8gsp7x6nig7q1ypjwngag7h2v400g52x2l"))))
+                 (base32 "0kvz6wln41k22kjrcs2hp3n5yghy0yfda9rg68yzhdnrgmzk7il9"))))
       (build-system emacs-build-system)
       (arguments
        (list
+        #:test-command #~(list "make" "-C" "test" "test")
         #:phases
         #~(modify-phases %standard-phases
+            (add-after 'unpack 'unpack-tests
+              (lambda _
+                (copy-recursively
+                 #$(this-package-native-input "emacs-gptel-test-files")
+                 "test")))
+            ;; gptel-pkg.el produces an error during the check phase.
+            (add-before 'check 'rename-pkg
+              (lambda _ (rename-file "gptel-pkg.el" "gptel-pkg.el_")))
+            (add-after 'check 'rename-pkg-back
+              (lambda _ (rename-file "gptel-pkg.el_" "gptel-pkg.el")))
             (add-after 'unpack 'use-appropriate-curl
               (lambda* (#:key inputs #:allow-other-keys)
+                ;; These two alternatives error on the substitution.
                 (emacs-substitute-variables "gptel-request.el"
-                  ("gptel-use-curl" (search-input-file inputs "/bin/curl"))))))))
+                  ("gptel-use-curl"
+                   (search-input-file inputs "/bin/curl"))))))))
       (inputs (list curl))
       (propagated-inputs (list emacs-compat emacs-transient))
+      (native-inputs
+       (list
+        (origin
+          (method git-fetch)
+          (uri (git-reference
+                 (url "https://github.com/karthink/gptel-test")
+                 (commit "c62e2f78d843f3454e068eb7ec6bb8d6001b0649")))
+          (file-name "emacs-gptel-test-files")
+          (sha256
+           (base32
+            "1xixi1fa2iwixi6f0wdva2pyisxb8myljwbx2v5nxd3v0i3fbgq9")))))
       (home-page "https://github.com/karthink/gptel")
       (synopsis "GPTel is a simple ChatGPT client for Emacs")
       (description
