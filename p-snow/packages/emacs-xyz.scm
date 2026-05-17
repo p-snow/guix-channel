@@ -302,7 +302,7 @@ It only supports Wayland GNU/Linux systems.")
                        (commit commit)))
                 (file-name (git-file-name name version))
                 (sha256
-                 (base32 "0kvz6wln41k22kjrcs2hp3n5yghy0yfda9rg68yzhdnrgmzk7il9"))))
+                 (base32 "1zm1v9agqpzpzrp8kiar5l3wndxfn2ldr4y4z7fq3zk7qhlb35im"))))
       (build-system emacs-build-system)
       (arguments
        (list
