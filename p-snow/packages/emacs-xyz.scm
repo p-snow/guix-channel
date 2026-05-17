@@ -375,7 +375,7 @@ files rather than customizing the variable directly.")
       (license license:gpl2+))))
 
 (define-public emacs-ob-gptel-latest
-  (let ((commit "cbed018a7d81de9ba8dc3220e1c4d10b7bb29b11")
+  (let ((commit "71584eb30e8317cf36104cec78b6d53c4433cae7")
         (revision "2"))
     (package
       (name "emacs-ob-gptel-latest")
@@ -388,7 +388,7 @@ files rather than customizing the variable directly.")
                 (commit commit)))
          (file-name (git-file-name name version))
          (sha256
-          (base32 "08ybvkzqpmb40kjd8apcp4yzjaf5350wjw7bzrcxbmdnlnxv6wcr"))))
+          (base32 "0n0vvaspx27vjfq55fcy9drhp46an73afi5fdsdx32hfw08y29ki"))))
       (build-system emacs-build-system)
       (arguments (list #:tests? #f))    ;no tests
       (propagated-inputs
