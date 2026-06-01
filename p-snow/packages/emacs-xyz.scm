@@ -291,7 +291,7 @@ It only supports Wayland GNU/Linux systems.")
 
 (define-public emacs-gptel-latest
   (let ((revision "0")
-        (commit "675a19aa68df693fa26070bf19b5d6fd53f2990f"))
+        (commit "f342b3010f135ca4a38b02564b50b2d3e66554cf"))
     (package
       (name "emacs-gptel-latest")
       (version (git-version "0.9.9.5" revision commit))
@@ -302,7 +302,7 @@ It only supports Wayland GNU/Linux systems.")
                        (commit commit)))
                 (file-name (git-file-name name version))
                 (sha256
-                 (base32 "1zm1v9agqpzpzrp8kiar5l3wndxfn2ldr4y4z7fq3zk7qhlb35im"))))
+                 (base32 "1cgkqz6gwlaxf077jgdh3q75kdvjm3jkh2270hs10rwbls05dlm9"))))
       (build-system emacs-build-system)
       (arguments
        (list
@@ -350,7 +350,7 @@ API key.")
 
 (define-public emacs-gptel-prompts-latest
   ;; No releases.
-  (let ((commit "7ce497590b006bb4b167abcdcbf2f069d9d72549")
+  (let ((commit "f6d590c70dd2a1bab4426e2d4e51543e9953feb2")
         (revision "1"))
     (package
       (name "emacs-gptel-prompts-latest")
@@ -362,7 +362,7 @@ API key.")
                 (commit commit)))
          (method git-fetch)
          (sha256
-          (base32 "0jqxpc93bdbfq8agq8jfkkkgjj9asir8szhzhxzc58xq2ycc0qn0"))
+          (base32 "1gnv2kzs09xzdywckwscg7sz3ay8904gj19k6vbwrmh7isyygxan"))
          (file-name (git-file-name name version))))
       (build-system emacs-build-system)
       (arguments (list #:tests? #f))    ;no tests
