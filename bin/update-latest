@@ -33,11 +33,16 @@ extract_package_info() {
     local commit revision url
 
     local section
-    section=$(grep -A30 "define-public $pkg_name" "$file" | head -30)
+    section=$(grep -A50 "define-public $pkg_name" "$file" | head -50)
 
-    commit=$(echo "$section" | grep -Eo '\(commit "[^"]+"\)' | head -1 | sed 's/.*"\([^"]*\)".*/\1/')
-    revision=$(echo "$section" | grep -Eo '\(revision "[^"]+"\)' | head -1 | sed 's/.*"\([^"]*\)".*/\1/')
-    url=$(echo "$section" | grep -Eo '\(url "[^"]+"\)' | head -1 | sed 's/.*"\([^"]*\)".*/\1/')
+    # Extract commit - look for 40-char hex string in quotes (from let binding or inline)
+    commit=$(echo "$section" | grep -Eo '"[a-f0-9]{40}"' | head -1 | sed 's/"//g')
+
+    # Extract revision
+    revision=$(echo "$section" | grep -Eo '\(revision "[^"]+"' | sed 's/.*"\([^"]*\)".*/\1/' | head -1)
+
+    # Extract url
+    url=$(echo "$section" | grep -Eo '\(url "[^"]+"' | sed 's/.*"\([^"]*\)".*/\1/' | head -1)
 
     echo "$commit|$revision|$url"
 }
@@ -73,11 +78,9 @@ update_package() {
     local new_commit="$4"
     local new_hash="$5"
 
-    local old_line new_line
-
-    old_line="(commit \"$old_commit\")"
-    new_line="(commit \"$new_commit\")"
-    sed -i "s/$old_line/$new_line/g" "$file"
+    # Update commit - replace the old commit hash with new one
+    # This works for both let binding and inline commit patterns
+    sed -i "s/\"$old_commit\"/\"$new_commit\"/" "$file"
 
     local old_hash
     old_hash=$(grep -A50 "define-public $pkg_name" "$file" | grep -E '^\s+\(base32 "' | head -1 | sed 's/.*"\([^"]*\)".*/\1/')
