@@ -28,7 +28,7 @@ Emacs
 - emacs-define-word :: Display the definition of word at point
 - emacs-pangu-spacing :: Add space between Chinese/Japanese/Korean and English characters
 - emacs-tinee :: Use Emacs for writing in any text area (Wayland)
-- emacs-minuet-latest :: AI-powered code completion for Emacs using multiple LLM backends
+- emacs-org-review :: Schedule reviews for Org entries
 - emacs-gptel-latest :: Simple ChatGPT client for Emacs
 - emacs-gptel-prompts-latest :: Alternative Gptel directives management
 - emacs-ob-gptel-latest :: Org Babel support for evaluating gptel prompts

@@ -275,8 +275,8 @@ It only supports Wayland GNU/Linux systems.")
                 (url "https://github.com/brabalan/org-review")
                 (commit commit)))
          (file-name (git-file-name name version))
-           (sha256
-           (base32 "1va21vgfaxwz19qg378vbq1dnb09l9klc2x31mc0r07p14dqhfy1"))))
+         (sha256
+          (base32 "1va21vgfaxwz19qg378vbq1dnb09l9klc2x31mc0r07p14dqhfy1"))))
       (build-system emacs-build-system)
       (arguments
        (list #:tests? #f))            ; no test suite
@@ -290,34 +290,6 @@ view, using the @code{org-review-agenda-skip} skipping function.
 To mark an entry as reviewed, use the function
 @code{org-review-insert-last-review} to set the LAST_REVIEW date to
 the current date.")
-      (license license:gpl3+))))
-
-(define-public emacs-minuet-latest
-  (let ((revision "0")
-        (commit "13fb314a795951b9190c53c59ef281abf7a2cb4f"))
-    (package
-      (name "emacs-minuet-latest")
-      (version (git-version "0.7.1" revision commit))
-      (source (origin
-                (method git-fetch)
-                (uri (git-reference
-                       (url "https://github.com/milanglacier/minuet-ai.el")
-                       (commit commit)))
-                (file-name (git-file-name name version))
-                (sha256
-                 (base32
-                  "1amkrhaab24z2v9mgqywx1rnwdxa7i1j42phs78al3dgykpk81g8"))))
-      (propagated-inputs
-       (list emacs-plz emacs-dash))
-      (build-system emacs-build-system)
-      (home-page "https://github.com/milanglacier/minuet-ai.el")
-      (synopsis "AI-powered code completion for Emacs using multiple LLM backends")
-      (description
-       "Minuet is an Emacs package that provides AI-powered code completion and
- suggestions.  It supports various Large Language Model (LLM) backends,
- including OpenAI, Anthropic, Gemini, and local providers via Ollama or
- llama.cpp.  Minuet features configurable inline completion, similar to GitHub
- Copilot, and can be integrated with existing Emacs completion frameworks.")
       (license license:gpl3+))))
 
 (define-public emacs-gptel-latest
