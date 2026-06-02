@@ -261,9 +261,40 @@ featureful or ambitious (in terms of supported systems) as
 It only supports Wayland GNU/Linux systems.")
     (license license:gpl3+)))
 
+(define-public emacs-org-review
+  ;; No releases/tags available; use latest commit.
+  (let ((commit "1f24fa504d58d619bb81a2c16058f685d85c2151")
+        (revision "0"))
+    (package
+      (name "emacs-org-review")
+      (version (git-version "0.4" revision commit))
+      (source
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+                (url "https://github.com/brabalan/org-review")
+                (commit commit)))
+         (file-name (git-file-name name version))
+           (sha256
+           (base32 "1va21vgfaxwz19qg378vbq1dnb09l9klc2x31mc0r07p14dqhfy1"))))
+      (build-system emacs-build-system)
+      (arguments
+       (list #:tests? #f))            ; no test suite
+      (home-page "https://github.com/brabalan/org-review")
+      (synopsis "Schedule reviews for Org entries")
+      (description
+       "This package allows scheduling reviews of Org entries.  Entries
+will be scheduled for review if their NEXT_REVIEW or their LAST_REVIEW
+property is set.  Checking of review dates is done through an agenda
+view, using the @code{org-review-agenda-skip} skipping function.
+To mark an entry as reviewed, use the function
+@code{org-review-insert-last-review} to set the LAST_REVIEW date to
+the current date.")
+      (license license:gpl3+))))
+
 (define-public emacs-minuet-latest
   (let ((revision "0")
-        (commit "cf31d5f31f271d9b97352146fc614e9475a4726d"))
+        (commit "13fb314a795951b9190c53c59ef281abf7a2cb4f"))
     (package
       (name "emacs-minuet-latest")
       (version (git-version "0.7.1" revision commit))
