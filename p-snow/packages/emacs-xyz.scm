@@ -303,12 +303,12 @@ the current date.")
               (url "https://github.com/jamescherti/kirigami.el")
               (commit version)))
        (file-name (git-file-name name version))
-(sha256
-         (base32 "1xl6v60msc6bvgij3hsm31bqhq8ikixwgsp8cdqnysbfhrm98g1c"))))
-     (build-system emacs-build-system)
-     (arguments
-      (list #:tests? #f))
-     (home-page "https://github.com/jamescherti/kirigami.el")
+       (sha256
+        (base32 "1xl6v60msc6bvgij3hsm31bqhq8ikixwgsp8cdqnysbfhrm98g1c"))))
+    (build-system emacs-build-system)
+    (arguments
+     (list #:tests? #f))
+    (home-page "https://github.com/jamescherti/kirigami.el")
     (synopsis
      "Unified method to fold and unfold text in Emacs across many modes")
     (description
