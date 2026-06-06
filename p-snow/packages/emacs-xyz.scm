@@ -292,6 +292,39 @@ To mark an entry as reviewed, use the function
 the current date.")
       (license license:gpl3+))))
 
+(define-public emacs-kirigami
+  (package
+    (name "emacs-kirigami")
+    (version "1.1.2")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/jamescherti/kirigami.el")
+              (commit version)))
+       (file-name (git-file-name name version))
+(sha256
+         (base32 "1xl6v60msc6bvgij3hsm31bqhq8ikixwgsp8cdqnysbfhrm98g1c"))))
+     (build-system emacs-build-system)
+     (arguments
+      (list #:tests? #f))
+     (home-page "https://github.com/jamescherti/kirigami.el")
+    (synopsis
+     "Unified method to fold and unfold text in Emacs across many modes")
+    (description
+     "The kirigami Emacs package provides a unified method to fold and
+unfold text in Emacs across a diverse set of major and minor modes,
+including outline-mode, outline-minor-mode, org-mode, markdown-mode,
+hs-minor-mode (hideshow), treesit-fold, vdiff, origami, and many more.
+
+With Kirigami, folding key bindings only need to be configured once.
+After that, the same keys work consistently across all supported modes,
+providing a unified and predictable experience for opening and closing
+folds.  It also fixes upstream Emacs outline bugs such as bug#79286,
+and preserves cursor position and window stability during fold
+operations.")
+    (license license:gpl3+)))
+
 (define-public emacs-gptel-latest
   (let ((revision "0")
         (commit "f342b3010f135ca4a38b02564b50b2d3e66554cf"))
