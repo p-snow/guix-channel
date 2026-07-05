@@ -157,33 +157,6 @@ mode to let hidden markers auto expose when the cursor on, and auto hide when
 cursor leave.")
     (license license:gpl3+)))
 
-(define-public emacs-whole-line-or-region
-  (let ((revision "0")
-        (commit "e854a446d36bf0af54b13730ceaaf0c75e636662"))
-    (package
-      (name "emacs-whole-line-or-region")
-      (version (git-version "2.0" revision commit))
-      (source
-       (origin
-         (method git-fetch)
-         (uri (git-reference
-                (url "https://github.com/purcell/whole-line-or-region.git")
-                (commit commit)))
-         (file-name (git-file-name name version))
-         (sha256
-          (base32 "1gphhl8l0hl7wsxih59bbc4a3p5wridhwcqp7lnc9bs89xhb2z6j"))))
-      (build-system emacs-build-system)
-      (arguments
-       (list
-        #:tests? #t
-        #:test-command #~(list "make" "test")))
-      (home-page "https://github.com/purcell/whole-line-or-region")
-      (synopsis "Operate on current line if region undefined")
-      (description
-       "This minor mode allows functions to operate on the current line if they would
-normally operate on a region and region is currently undefined.")
-      (license license:gpl3+))))
-
 (define-public emacs-define-word
   (let ((revision "0")
         (commit "31a8c67405afa99d0e25e7c86a4ee7ef84a808fe"))
@@ -295,7 +268,7 @@ the current date.")
 (define-public emacs-kirigami
   (package
     (name "emacs-kirigami")
-    (version "1.1.2")
+    (version "1.1.5")
     (source
      (origin
        (method git-fetch)
@@ -304,7 +277,7 @@ the current date.")
               (commit version)))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1xl6v60msc6bvgij3hsm31bqhq8ikixwgsp8cdqnysbfhrm98g1c"))))
+        (base32 "03ql2x4npkw60mjvfn83gnp6dbshf6ikhj7558mwdk8qi695q2fc"))))
     (build-system emacs-build-system)
     (arguments
      (list #:tests? #f))
@@ -327,7 +300,7 @@ operations.")
 
 (define-public emacs-gptel-latest
   (let ((revision "0")
-        (commit "6589abf7c51143f9424f3e402b29dd7755408781"))
+        (commit "3bc90bdfb97a7d8051b4aada66bd0609d1e26faa"))
     (package
       (name "emacs-gptel-latest")
       (version (git-version "0.9.9.5" revision commit))
@@ -338,7 +311,7 @@ operations.")
                        (commit commit)))
                 (file-name (git-file-name name version))
                 (sha256
-                 (base32 "1z7jpmdy3wp6d5yj4zpkpscygkxpapj9rpd1b7mwlm7ihp128yrf"))))
+                 (base32 "1khniqhapla5dyvszpqb6nspnd0906m2dklvb94a674r3jsxmh51"))))
       (build-system emacs-build-system)
       (arguments
        (list
