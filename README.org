@@ -21,6 +21,7 @@ To use this channel, add the following code snippet to your configuration file(~
 Emacs
 - emacs-org-web-track :: Web data tracking framework in Org Mode
 - emacs-org-tag-tree :: Define Org-mode tag hierarchies from Org subtrees
+- emacs-org-tag-tree :: Locate-based Org file link with which users can abbreviate file paths
 - emacs-org-clock-convenience :: Convenience functions for org time
 - emacs-org-hide-drawers :: Hide drawers in org-mode with overlays
 - emacs-org-expose-emphasis-markers :: Automatically show hidden emphasis markers at point in org mode

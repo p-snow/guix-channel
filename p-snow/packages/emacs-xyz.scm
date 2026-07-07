@@ -83,6 +83,31 @@ from web pages and web APIs.")
      "org-tag-tree lets you describe Org tag hierarchies as ordinary Org trees.")
     (license license:gpl3+)))
 
+(define-public emacs-ol-locate-file
+  (package
+    (name "emacs-ol-locate-file")
+    (version "0.1.2")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/p-snow/ol-locate-file")
+              (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "1zlkixv2w3hrbw1jgd6qhfllxbkliqxhv71y8ghj63508vwr34jn"))))
+    (build-system emacs-build-system)
+    (arguments
+     (list
+      #:tests? #t
+      #:test-command #~(list "make" "unit-test")))
+    (home-page "https://github.com/p-snow/ol-locate-file")
+    (synopsis "Locate-based Org file link with which users can abbreviate file paths.")
+    (description
+     "This package provides an Org link type that resolves partial file path
+substrings into full paths using `locate' or a configurable search command.")
+    (license license:gpl3+)))
+
 (define-public emacs-org-clock-convenience
   (let ((revision "0")
         (commit "5a9e32af581ecca0359de1815e3d37b563f9f8b2"))
