@@ -325,7 +325,7 @@ operations.")
 
 (define-public emacs-gptel-latest
   (let ((revision "0")
-        (commit "3bc90bdfb97a7d8051b4aada66bd0609d1e26faa"))
+        (commit "8701e2bd80c5d2091ce2decef5d34d6fce4a3ada"))
     (package
       (name "emacs-gptel-latest")
       (version (git-version "0.9.9.5" revision commit))
@@ -336,7 +336,7 @@ operations.")
                        (commit commit)))
                 (file-name (git-file-name name version))
                 (sha256
-                 (base32 "1khniqhapla5dyvszpqb6nspnd0906m2dklvb94a674r3jsxmh51"))))
+                 (base32 "0sy58l4ixv01g7n9ybzcp7y3mhwm3p9353aj0wn46nharji4nca5"))))
       (build-system emacs-build-system)
       (arguments
        (list
@@ -434,7 +434,7 @@ an alternative interface to evaluate @{gptel} prompts as Org mode blocks.")
       (license license:gpl3+))))
 
 (define-public emacs-gptel-agent-latest
-  (let ((commit "e2ef97d6b566b2ad751c8a0a87b8272710c95808")
+  (let ((commit "e833bcaf617baf8c8075eac098231c4457386814")
         (revision "0"))
     (package
       (name "emacs-gptel-agent-latest")
@@ -447,7 +447,7 @@ an alternative interface to evaluate @{gptel} prompts as Org mode blocks.")
                 (commit commit)))
          (file-name (git-file-name name version))
          (sha256
-          (base32 "0k88fav640ckjjv269zx6zlhjghr551bcamx7argvs8i5ca7r9jx"))))
+          (base32 "165jvz2v88j9j2h76qxj4awk7x699v5ahg4vvg06p6p37zfyfzc1"))))
       (build-system emacs-build-system)
       (arguments
        (list
