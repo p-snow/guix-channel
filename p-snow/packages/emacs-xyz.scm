@@ -182,6 +182,35 @@ mode to let hidden markers auto expose when the cursor on, and auto hide when
 cursor leave.")
     (license license:gpl3+)))
 
+(define-public emacs-avy-migemo-workaround
+  (let ((revision "0")
+        (commit "922a6dd82c0bfa316b0fbb56a9d4dd4ffa5707e7"))
+    (package
+      (name "emacs-avy-migemo-workaround")
+      (version (git-version "0.3.2" revision commit))
+      (source
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+                (url "https://github.com/momomo5717/avy-migemo")
+                (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32 "1a4421h15ba7lsnbh8kqm3hvs06fp830wb1nvwgpsk7vmqqi2qgl"))))
+      (build-system emacs-build-system)
+      (arguments
+       '(#:exclude (cons* "^avy-migemo-e\\.g\\.[^/]*\\.el$" %default-exclude)))
+      (propagated-inputs (list emacs-avy
+                               (@ (guix-jp packages emacs-xyz) emacs-migemo)))
+      (home-page "https://github.com/momomo5717/avy-migemo")
+      (synopsis "Emacs Avy for Japanese")
+      (description
+       "This package enables support for Japanese when using Avy in Emacs.  Avy is a
+completion method for characters, words, and similar elements based on a
+balanced decision tree.  With this package, Japanese characters are added to
+Avy's targets, allowing users to narrow down the decision tree using kana input.")
+      (license license:gpl3+))))
+
 (define-public emacs-define-word
   (let ((revision "0")
         (commit "31a8c67405afa99d0e25e7c86a4ee7ef84a808fe"))
